@@ -3,22 +3,22 @@
     <name>AboutDialog</name>
     <message>
         <location filename="../forms/aboutdialog.ui" line="+14"/>
-        <source>About Clam</source>
-        <translation>Acerca de Clam</translation>
+        <source>About Bricoleur</source>
+        <translation>Acerca de Bricoleur</translation>
     </message>
     <message>
         <location line="+39"/>
-        <source>&lt;b&gt;Clam&lt;/b&gt; version</source>
-        <translation>&lt;b&gt;Clam&lt;/b&gt; versión</translation>
+        <source>&lt;b&gt;Bricoleur&lt;/b&gt; version</source>
+        <translation>&lt;b&gt;Bricoleur&lt;/b&gt; versión</translation>
     </message>
     <message>
         <location line="+41"/>
         <source>Copyright © 2009-2014 The Bitcoin developers
 Copyright © 2012-2014 The NovaCoin developers
-Copyright © 2014 The Clam developers</source>
+Copyright © 2014 The Bricoleur developers</source>
         <translation>Copyright © 2009-2014 The Bitcoin developers
 Copyright © 2012-2014 The NovaCoin developers
-Copyright © 2014 The Clam developers</translation>
+Copyright © 2014 The Bricoleur developers</translation>
     </message>
     <message>
         <location line="+15"/>
@@ -68,8 +68,8 @@ Eric Young (eay@cryptsoft.com) y el software UPnP escrito por Thomas Bernard.</t
     </message>
     <message>
         <location line="-46"/>
-        <source>These are your Clam addresses for receiving payments. You may want to give a different one to each sender so you can keep track of who is paying you.</source>
-        <translation>Estas son las direcciones de Clam para recibir pagos. Es posible que desee dar una diferente a cada remitente para que pueda realizar un seguimiento de quien te está pagando.</translation>
+        <source>These are your Bricoleur addresses for receiving payments. You may want to give a different one to each sender so you can keep track of who is paying you.</source>
+        <translation>Estas son las direcciones de Bricoleur para recibir pagos. Es posible que desee dar una diferente a cada remitente para que pueda realizar un seguimiento de quien te está pagando.</translation>
     </message>
     <message>
         <location line="+60"/>
@@ -83,8 +83,8 @@ Eric Young (eay@cryptsoft.com) y el software UPnP escrito por Thomas Bernard.</t
     </message>
     <message>
         <location line="+11"/>
-        <source>Sign a message to prove you own a Clam address</source>
-        <translation>Firmar un mensaje para demostrar que es dueño de su dirección de Clam</translation>
+        <source>Sign a message to prove you own a Bricoleur address</source>
+        <translation>Firmar un mensaje para demostrar que es dueño de su dirección de Bricoleur</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -98,8 +98,8 @@ Eric Young (eay@cryptsoft.com) y el software UPnP escrito por Thomas Bernard.</t
     </message>
     <message>
         <location line="-14"/>
-        <source>Verify a message to ensure it was signed with a specified Clam address</source>
-        <translation>Verifique el mensaje para asegurarse que fue firmado por una dirección específica de Clam</translation>
+        <source>Verify a message to ensure it was signed with a specified Bricoleur address</source>
+        <translation>Verifique el mensaje para asegurarse que fue firmado por una dirección específica de Bricoleur</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -266,8 +266,8 @@ Eric Young (eay@cryptsoft.com) y el software UPnP escrito por Thomas Bernard.</t
     </message>
     <message>
         <location line="-58"/>
-        <source>Clam will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your coins from being stolen by malware infecting your computer.</source>
-        <translation>Clam cerrará para terminar el proceso de encriptación. Recuerde que la encriptación de su monedero no puede proteger completamente que sus monedas sean robadas por malware infectando su computadora.</translation>
+        <source>Bricoleur will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your coins from being stolen by malware infecting your computer.</source>
+        <translation>Bricoleur cerrará para terminar el proceso de encriptación. Recuerde que la encriptación de su monedero no puede proteger completamente que sus monedas sean robadas por malware infectando su computadora.</translation>
     </message>
     <message>
         <location line="+13"/>
@@ -380,8 +380,8 @@ Eric Young (eay@cryptsoft.com) y el software UPnP escrito por Thomas Bernard.</t
     </message>
     <message>
         <location line="+6"/>
-        <source>Show information about Clam</source>
-        <translation>Mostrar información sobre Clam</translation>
+        <source>Show information about Bricoleur</source>
+        <translation>Mostrar información sobre Bricoleur</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -430,13 +430,13 @@ Eric Young (eay@cryptsoft.com) y el software UPnP escrito por Thomas Bernard.</t
     </message>
     <message>
         <location line="-64"/>
-        <source>Send coins to a Clam address</source>
-        <translation>Enviar monedas a una dirección de Clam</translation>
+        <source>Send coins to a Bricoleur address</source>
+        <translation>Enviar monedas a una dirección de Bricoleur</translation>
     </message>
     <message>
         <location line="+47"/>
-        <source>Modify configuration options for Clam</source>
-        <translation>Modificar las opciones de configuración para Clam</translation>
+        <source>Modify configuration options for Bricoleur</source>
+        <translation>Modificar las opciones de configuración para Bricoleur</translation>
     </message>
     <message>
         <location line="+18"/>
@@ -475,8 +475,8 @@ Eric Young (eay@cryptsoft.com) y el software UPnP escrito por Thomas Bernard.</t
     </message>
     <message>
         <location line="-202"/>
-        <source>Clam</source>
-        <translation>Clam</translation>
+        <source>Bricoleur</source>
+        <translation>Bricoleur</translation>
     </message>
     <message>
         <location line="+0"/>
@@ -485,8 +485,8 @@ Eric Young (eay@cryptsoft.com) y el software UPnP escrito por Thomas Bernard.</t
     </message>
     <message>
         <location line="+180"/>
-        <source>&amp;About Clam</source>
-        <translation>Acerca de Clam</translation>
+        <source>&amp;About Bricoleur</source>
+        <translation>Acerca de Bricoleur</translation>
     </message>
     <message>
         <location line="+9"/>
@@ -542,13 +542,13 @@ Eric Young (eay@cryptsoft.com) y el software UPnP escrito por Thomas Bernard.</t
     <message>
         <location line="+0"/>
         <location line="+60"/>
-        <source>Clam client</source>
-        <translation>Cliente Clam</translation>
+        <source>Bricoleur client</source>
+        <translation>Cliente Bricoleur</translation>
     </message>
     <message numerus="yes">
         <location line="+75"/>
-        <source>%n active connection(s) to Clam network</source>
-        <translation><numerusform>%n conexión activa a la red Clam</numerusform><numerusform>%n conexiones activas a la red Clam</numerusform></translation>
+        <source>%n active connection(s) to Bricoleur network</source>
+        <translation><numerusform>%n conexión activa a la red Bricoleur</numerusform><numerusform>%n conexiones activas a la red Clam</numerusform></translation>
     </message>
     <message>
         <location line="+40"/>
@@ -587,13 +587,13 @@ Eric Young (eay@cryptsoft.com) y el software UPnP escrito por Thomas Bernard.</t
     </message>
     <message>
         <location line="-312"/>
-        <source>About Clam card</source>
-        <translation>Sobre la tarjeta Clam</translation>
+        <source>About Bricoleur card</source>
+        <translation>Sobre la tarjeta Bricoleur</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Show information about Clam card</source>
-        <translation>Mostrar información sobre la tarjeta Clam</translation>
+        <source>Show information about Bricoleur card</source>
+        <translation>Mostrar información sobre la tarjeta Bricoleur</translation>
     </message>
     <message>
         <location line="+18"/>
@@ -672,8 +672,8 @@ Dirección: %4
     <message>
         <location line="-15"/>
         <location line="+15"/>
-        <source>URI can not be parsed! This can be caused by an invalid Clam address or malformed URI parameters.</source>
-        <translation>URI no se puede analizar! Esto puede ser causado por una dirección de Clam no válida o parámetros de URI malformados.</translation>
+        <source>URI can not be parsed! This can be caused by an invalid Bricoleur address or malformed URI parameters.</source>
+        <translation>URI no se puede analizar! Esto puede ser causado por una dirección de Bricoleur no válida o parámetros de URI malformados.</translation>
     </message>
     <message>
         <location line="+18"/>
@@ -732,8 +732,8 @@ Dirección: %4
     </message>
     <message>
         <location filename="../bitcoin.cpp" line="+109"/>
-        <source>A fatal error occurred. Clam can no longer continue safely and will quit.</source>
-        <translation>Se ha producido un error fatal. Clam ya no puede continuar de forma segura y cerrará.</translation>
+        <source>A fatal error occurred. Bricoleur can no longer continue safely and will quit.</source>
+        <translation>Se ha producido un error fatal. Bricoleur ya no puede continuar de forma segura y cerrará.</translation>
     </message>
 </context>
 <context>
@@ -1066,8 +1066,8 @@ Esto significa que se requiere una cuota de al menos %2.</translation>
     </message>
     <message>
         <location line="-5"/>
-        <source>The entered address &quot;%1&quot; is not a valid Clam address.</source>
-        <translation>La dirección introducida &quot;%1&quot; no es una dirección válida de Clam.</translation>
+        <source>The entered address &quot;%1&quot; is not a valid Bricoleur address.</source>
+        <translation>La dirección introducida &quot;%1&quot; no es una dirección válida de Bricoleur.</translation>
     </message>
     <message>
         <location line="+10"/>
@@ -1085,8 +1085,8 @@ Esto significa que se requiere una cuota de al menos %2.</translation>
     <message>
         <location filename="../guiutil.cpp" line="+420"/>
         <location line="+12"/>
-        <source>Clam-Qt</source>
-        <translation>Clam-Qt</translation>
+        <source>Bricoleur-Qt</source>
+        <translation>Bricoleur-Qt</translation>
     </message>
     <message>
         <location line="-12"/>
@@ -1158,13 +1158,13 @@ Esto significa que se requiere una cuota de al menos %2.</translation>
     </message>
     <message>
         <location line="+31"/>
-        <source>Automatically start Clam after logging in to the system.</source>
-        <translation>Iniciar Clam automáticamente después de entrar en el sistema.</translation>
+        <source>Automatically start Bricoleur after logging in to the system.</source>
+        <translation>Iniciar Bricoleur automáticamente después de entrar en el sistema.</translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>&amp;Start Clam on system login</source>
-        <translation>&amp;Iniciar Clam al inicio del sistema</translation>
+        <source>&amp;Start Bricoleur on system login</source>
+        <translation>&amp;Iniciar Bricoleur al inicio del sistema</translation>
     </message>
     <message>
         <location line="+7"/>
@@ -1183,8 +1183,8 @@ Esto significa que se requiere una cuota de al menos %2.</translation>
     </message>
     <message>
         <location line="+6"/>
-        <source>Automatically open the Clam client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Abrir automáticamente el puerto de cliente Clam en el router. Esto sólo funciona cuando el router es compatible con UPnP y está habilitado.</translation>
+        <source>Automatically open the Bricoleur client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Abrir automáticamente el puerto de cliente Bricoleur en el router. Esto sólo funciona cuando el router es compatible con UPnP y está habilitado.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1193,8 +1193,8 @@ Esto significa que se requiere una cuota de al menos %2.</translation>
     </message>
     <message>
         <location line="+7"/>
-        <source>Connect to the Clam network through a SOCKS proxy (e.g. when connecting through Tor).</source>
-        <translation>Conéctese a la red de Clam a través de un SOCKS proxy (e.g. cuando se conecta a través de Tor)</translation>
+        <source>Connect to the Bricoleur network through a SOCKS proxy (e.g. when connecting through Tor).</source>
+        <translation>Conéctese a la red de Bricoleur a través de un SOCKS proxy (e.g. cuando se conecta a través de Tor)</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1268,8 +1268,8 @@ Esto significa que se requiere una cuota de al menos %2.</translation>
     </message>
     <message>
         <location line="+13"/>
-        <source>The user interface language can be set here. This setting will take effect after restarting Clam.</source>
-        <translation>El idioma del interfaz de usuario se puede configurar aquí. Esta configuración se aplicará después de reiniciar Clam.</translation>
+        <source>The user interface language can be set here. This setting will take effect after restarting Bricoleur.</source>
+        <translation>El idioma del interfaz de usuario se puede configurar aquí. Esta configuración se aplicará después de reiniciar Bricoleur.</translation>
     </message>
     <message>
         <location line="+11"/>
@@ -1283,8 +1283,8 @@ Esto significa que se requiere una cuota de al menos %2.</translation>
     </message>
     <message>
         <location line="+9"/>
-        <source>Whether to show Clam addresses in the transaction list or not.</source>
-        <translation>Tanto para mostrar direcciones de Clam en la lista de transacciones o no.</translation>
+        <source>Whether to show Bricoleur addresses in the transaction list or not.</source>
+        <translation>Tanto para mostrar direcciones de Bricoleur en la lista de transacciones o no.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1330,8 +1330,8 @@ Esto significa que se requiere una cuota de al menos %2.</translation>
     <message>
         <location line="-9"/>
         <location line="+9"/>
-        <source>This setting will take effect after restarting Clam.</source>
-        <translation>Esta configuración se aplicará después de reiniciar Clam.</translation>
+        <source>This setting will take effect after restarting Bricoleur.</source>
+        <translation>Esta configuración se aplicará después de reiniciar Bricoleur.</translation>
     </message>
     <message>
         <location line="+29"/>
@@ -1349,8 +1349,8 @@ Esto significa que se requiere una cuota de al menos %2.</translation>
     <message>
         <location line="+33"/>
         <location line="+231"/>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Clam network after a connection is established, but this process has not completed yet.</source>
-        <translation>La información mostrada puede estar fuera de fecha. Su monedera se sincroniza automáticamente con la red Clam después de que se establece una conexión, pero este proceso no se ha completado todavía.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Bricoleur network after a connection is established, but this process has not completed yet.</source>
+        <translation>La información mostrada puede estar fuera de fecha. Su monedera se sincroniza automáticamente con la red Bricoleur después de que se establece una conexión, pero este proceso no se ha completado todavía.</translation>
     </message>
     <message>
         <location line="-160"/>
@@ -1565,8 +1565,8 @@ Esto significa que se requiere una cuota de al menos %2.</translation>
     </message>
     <message>
         <location line="+7"/>
-        <source>Show the Clam-Qt help message to get a list with possible Clam command-line options.</source>
-        <translation>Mostrar el mensaje de ayuda de Clam-Qt para obtener una lista con las posibles opciones de línea de comandos para Clam.</translation>
+        <source>Show the Bricoleur-Qt help message to get a list with possible Clam command-line options.</source>
+        <translation>Mostrar el mensaje de ayuda de Bricoleur-Qt para obtener una lista con las posibles opciones de línea de comandos para Clam.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1585,13 +1585,13 @@ Esto significa que se requiere una cuota de al menos %2.</translation>
     </message>
     <message>
         <location line="-104"/>
-        <source>Clam - Debug window</source>
-        <translation>Clam - Ventana de depuración</translation>
+        <source>Bricoleur - Debug window</source>
+        <translation>Bricoleur - Ventana de depuración</translation>
     </message>
     <message>
         <location line="+25"/>
-        <source>Clam Core</source>
-        <translation>Núcleo Clam</translation>
+        <source>Bricoleur Core</source>
+        <translation>Núcleo Bricoleur</translation>
     </message>
     <message>
         <location line="+279"/>
@@ -1600,8 +1600,8 @@ Esto significa que se requiere una cuota de al menos %2.</translation>
     </message>
     <message>
         <location line="+7"/>
-        <source>Open the Clam debug log file from the current data directory. This can take a few seconds for large log files.</source>
-        <translation>Abre el archivo de registro de Clam del directorio de datos actual. Esto puede tardar algunos segundos para archivos grandes.</translation>
+        <source>Open the Bricoleur debug log file from the current data directory. This can take a few seconds for large log files.</source>
+        <translation>Abre el archivo de registro de Bricoleur del directorio de datos actual. Esto puede tardar algunos segundos para archivos grandes.</translation>
     </message>
     <message>
         <location line="+102"/>
@@ -1610,8 +1610,8 @@ Esto significa que se requiere una cuota de al menos %2.</translation>
     </message>
     <message>
         <location filename="../rpcconsole.cpp" line="-33"/>
-        <source>Welcome to the Clam RPC console.</source>
-        <translation>Bienvenido a la consola RPC de Clam</translation>
+        <source>Welcome to the Bricoleur RPC console.</source>
+        <translation>Bienvenido a la consola RPC de Bricoleur</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -1684,8 +1684,8 @@ Esto significa que se requiere una cuota de al menos %2.</translation>
         <location line="+86"/>
         <location line="+86"/>
         <location line="+32"/>
-        <source>0.00 CLAM</source>
-        <translation>123.456 CLAM {0.00 ?}</translation>
+        <source>0.00 BRIC</source>
+        <translation>123.456 BRIC {0.00 ?}</translation>
     </message>
     <message>
         <location line="-191"/>
@@ -1754,8 +1754,8 @@ Esto significa que se requiere una cuota de al menos %2.</translation>
     </message>
     <message>
         <location line="+16"/>
-        <source>123.456 CLAM</source>
-        <translation>123.456 CLAM</translation>
+        <source>123.456 BRIC</source>
+        <translation>123.456 BRIC</translation>
     </message>
     <message>
         <location line="+31"/>
@@ -1769,8 +1769,8 @@ Esto significa que se requiere una cuota de al menos %2.</translation>
     </message>
     <message>
         <location filename="../sendcoinsdialog.cpp" line="-173"/>
-        <source>Enter a Clam address (e.g. x8JdtsqUGiV33P6sMUdfSBHnE7JEUyxTaJ)</source>
-        <translation>Introduce una dirección Clam (p.ej. x8JdtsqUGiV33P6sMUdfSBHnE7JEUyxTaJ)</translation>
+        <source>Enter a Bricoleur address (e.g. x8JdtsqUGiV33P6sMUdfSBHnE7JEUyxTaJ)</source>
+        <translation>Introduce una dirección Bricoleur (p.ej. x8JdtsqUGiV33P6sMUdfSBHnE7JEUyxTaJ)</translation>
     </message>
     <message>
         <location line="+15"/>
@@ -1869,8 +1869,8 @@ Esto significa que se requiere una cuota de al menos %2.</translation>
     </message>
     <message>
         <location line="+251"/>
-        <source>WARNING: Invalid Clam address</source>
-        <translation>ADVERTENCIA: Dirección Clam inválida</translation>
+        <source>WARNING: Invalid Bricoleur address</source>
+        <translation>ADVERTENCIA: Dirección Bricoleur inválida</translation>
     </message>
     <message>
         <location line="+13"/>
@@ -1943,8 +1943,8 @@ Esto significa que se requiere una cuota de al menos %2.</translation>
     </message>
     <message>
         <location filename="../sendcoinsentry.cpp" line="+1"/>
-        <source>Enter a Clam address (e.g. x8JdtsqUGiV33P6sMUdfSBHnE7JEUyxTaJ)</source>
-        <translation>Introduce una dirección Clam (p.ej. x8JdtsqUGiV33P6sMUdfSBHnE7JEUyxTaJ)</translation>
+        <source>Enter a Bricoleur address (e.g. x8JdtsqUGiV33P6sMUdfSBHnE7JEUyxTaJ)</source>
+        <translation>Introduce una dirección Bricoleur (p.ej. x8JdtsqUGiV33P6sMUdfSBHnE7JEUyxTaJ)</translation>
     </message>
 </context>
 <context>
@@ -2004,8 +2004,8 @@ Esto significa que se requiere una cuota de al menos %2.</translation>
     </message>
     <message>
         <location line="+21"/>
-        <source>Sign the message to prove you own this Clam address</source>
-        <translation>Firma el mensaje para demostrar que posees esta dirección Clam.</translation>
+        <source>Sign the message to prove you own this Bricoleur address</source>
+        <translation>Firma el mensaje para demostrar que posees esta dirección Bricoleur.</translation>
     </message>
     <message>
         <location line="+17"/>
@@ -2036,8 +2036,8 @@ Esto significa que se requiere una cuota de al menos %2.</translation>
     </message>
     <message>
         <location line="+40"/>
-        <source>Verify the message to ensure it was signed with the specified Clam address</source>
-        <translation>Verifique el mensaje para asegurarse de que se firmó con la dirección Clam especificada.</translation>
+        <source>Verify the message to ensure it was signed with the specified Bricoleur address</source>
+        <translation>Verifique el mensaje para asegurarse de que se firmó con la dirección Bricoleur especificada.</translation>
     </message>
     <message>
         <location line="+17"/>
@@ -2047,8 +2047,8 @@ Esto significa que se requiere una cuota de al menos %2.</translation>
     <message>
         <location filename="../signverifymessagedialog.cpp" line="+27"/>
         <location line="+3"/>
-        <source>Enter a Clam address (e.g. x8JdtsqUGiV33P6sMUdfSBHnE7JEUyxTaJ)</source>
-        <translation>Introduce una dirección Clam (p.ej x8JdtsqUGiV33P6sMUdfSBHnE7JEUyxTaJ)</translation>
+        <source>Enter a Bricoleur address (e.g. x8JdtsqUGiV33P6sMUdfSBHnE7JEUyxTaJ)</source>
+        <translation>Introduce una dirección Bricoleur (p.ej x8JdtsqUGiV33P6sMUdfSBHnE7JEUyxTaJ)</translation>
     </message>
     <message>
         <location line="-2"/>
@@ -2057,8 +2057,8 @@ Esto significa que se requiere una cuota de al menos %2.</translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>Enter Clam signature</source>
-        <translation>Introduce la firma Clam</translation>
+        <source>Enter Bricoleur signature</source>
+        <translation>Introduce la firma Bricoleur</translation>
     </message>
     <message>
         <location line="+82"/>
@@ -2628,8 +2628,8 @@ Esto significa que se requiere una cuota de al menos %2.</translation>
     <name>bitcoin-core</name>
     <message>
         <location filename="../bitcoinstrings.cpp" line="+33"/>
-        <source>Clam version</source>
-        <translation>versión Clam</translation>
+        <source>Bricoleur version</source>
+        <translation>versión Bricoleur</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -2638,8 +2638,8 @@ Esto significa que se requiere una cuota de al menos %2.</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Send command to -server or clamd</source>
-        <translation>Envía un comando a -server o clamd</translation>
+        <source>Send command to -server or bricoleurd</source>
+        <translation>Envía un comando a -server o bricoleurd</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -2661,13 +2661,13 @@ Esto significa que se requiere una cuota de al menos %2.</translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>Specify configuration file (default: clam.conf)</source>
-        <translation>Especifica un archivo de configuración (por defecto: clam.conf)</translation>
+        <source>Specify configuration file (default: bricoleur.conf)</source>
+        <translation>Especifica un archivo de configuración (por defecto: bricoleur.conf)</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Specify pid file (default: clamd.pid)</source>
-        <translation>Especifica un archivo pid (por defecto: clamd.pid)</translation>
+        <source>Specify pid file (default: bricoleurd.pid)</source>
+        <translation>Especifica un archivo pid (por defecto: bricoleurd.pid)</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -2819,8 +2819,8 @@ Esto significa que se requiere una cuota de al menos %2.</translation>
     </message>
     <message>
         <location line="+61"/>
-        <source>Warning: Please check that your computer&apos;s date and time are correct! If your clock is wrong Clam will not work properly.</source>
-        <translation>Advertencia: Verifique que la fecha y hora del equipo sean correctas! Si su reloj es erróneo Clam no funcionará correctamente.</translation>
+        <source>Warning: Please check that your computer&apos;s date and time are correct! If your clock is wrong Bricoleur will not work properly.</source>
+        <translation>Advertencia: Verifique que la fecha y hora del equipo sean correctas! Si su reloj es erróneo Bricoleur no funcionará correctamente.</translation>
     </message>
     <message>
         <location line="-31"/>
@@ -3010,24 +3010,24 @@ Esto significa que se requiere una cuota de al menos %2.</translation>
         <source>%s, you must set a rpcpassword in the configuration file:
  %s
 It is recommended you use the following random password:
-rpcuser=clamrpc
+rpcuser=bricoleurrpc
 rpcpassword=%s
 (you do not need to remember this password)
 The username and password MUST NOT be the same.
 If the file does not exist, create it with owner-readable-only file permissions.
 It is also recommended to set alertnotify so you are notified of problems;
-for example: alertnotify=echo %%s | mail -s &quot;Clam Alert&quot; admin@foo.com
+for example: alertnotify=echo %%s | mail -s &quot;Bricoleur Alert&quot; admin@foo.com
 </source>
         <translation>%s, debe establecer un rpcpassword en el fichero de configuración:
 %s
 Se recomienda utilizar la siguiente contraseña aleatoria:
-rpcuser=clamrpc
+rpcuser=bricoleurrpc
 rpcpassword=%s
 (no necesita recordar este password)
 El nombre de usuario y contraseña no debe ser el mismo.
 Si no existe el archivo, créelo con permisos de sólo lectura para el dueño.
 También se recomienda establecer alertnotify para ser notificado de los problemas;
-por ejemplo: alertnotify=echo %%s | mail -s &quot;Clam Alert&quot; admin@foo.com
+por ejemplo: alertnotify=echo %%s | mail -s &quot;Bricoleur Alert&quot; admin@foo.com
 </translation>
     </message>
     <message>
@@ -3159,13 +3159,13 @@ por ejemplo: alertnotify=echo %%s | mail -s &quot;Clam Alert&quot; admin@foo.com
     </message>
     <message>
         <location line="+1"/>
-        <source>Cannot obtain a lock on data directory %s.  Clam is probably already running.</source>
-        <translation>No se puede obtener un bloqueo en el directorio de datos %s. Clam probablemente ya esté en funcionamiento.</translation>
+        <source>Cannot obtain a lock on data directory %s.  Bricoleur is probably already running.</source>
+        <translation>No se puede obtener un bloqueo en el directorio de datos %s. Bricoleur probablemente ya esté en funcionamiento.</translation>
     </message>
     <message>
         <location line="-98"/>
-        <source>Clam</source>
-        <translation>Clam</translation>
+        <source>Bricoleur</source>
+        <translation>Bricoleur</translation>
     </message>
     <message>
         <location line="+140"/>
@@ -3199,13 +3199,13 @@ por ejemplo: alertnotify=echo %%s | mail -s &quot;Clam Alert&quot; admin@foo.com
     </message>
     <message>
         <location line="+4"/>
-        <source>Error loading wallet.dat: Wallet requires newer version of Clam</source>
-        <translation>Error cargando wallet.dat: El monedero requiere una nueva versión de Clam</translation>
+        <source>Error loading wallet.dat: Wallet requires newer version of Bricoleur</source>
+        <translation>Error cargando wallet.dat: El monedero requiere una nueva versión de Bricoleur</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Wallet needed to be rewritten: restart Clam to complete</source>
-        <translation>El monedero necesita ser reescrito: reinicie Clam para completar</translation>
+        <source>Wallet needed to be rewritten: restart Bricoleur to complete</source>
+        <translation>El monedero necesita ser reescrito: reinicie Bricoleur para completar</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -3274,8 +3274,8 @@ por ejemplo: alertnotify=echo %%s | mail -s &quot;Clam Alert&quot; admin@foo.com
     </message>
     <message>
         <location line="+122"/>
-        <source>Unable to bind to %s on this computer. Clam is probably already running.</source>
-        <translation>No se puede enlazar a %s en este equipo. Clam probablemente ya esté en funcionamiento.</translation>
+        <source>Unable to bind to %s on this computer. Bricoleur is probably already running.</source>
+        <translation>No se puede enlazar a %s en este equipo. Bricoleur probablemente ya esté en funcionamiento.</translation>
     </message>
     <message>
         <location line="-97"/>

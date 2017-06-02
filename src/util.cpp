@@ -6,7 +6,7 @@
 #include "util.h"
 
 #include "chainparams.h"
-#include "clamspeech.h"
+#include "bricoleurspeech.h"
 #include "random.h"
 #include "sync.h"
 #include "ui_interface.h"
@@ -15,7 +15,7 @@
 #include "openssl/sha.h"
 
 #include <algorithm>
-//For clamspeech until beter solution derivied.
+//For bricoleurspeech until beter solution derivied.
 #include <iostream>
 #include <iterator>
 #include <fstream>
@@ -933,7 +933,7 @@ static std::string FormatException(std::exception* pex, const char* pszThread)
     char pszModule[MAX_PATH] = "";
     GetModuleFileNameA(NULL, pszModule, sizeof(pszModule));
 #else
-    const char* pszModule = "clam";
+    const char* pszModule = "bricoleur";
 #endif
     if (pex)
         return strprintf(
@@ -963,13 +963,13 @@ void PrintExceptionContinue(std::exception* pex, const char* pszThread)
 boost::filesystem::path GetDefaultDataDir()
 {
     namespace fs = boost::filesystem;
-    // Windows < Vista: C:\Documents and Settings\Username\Application Data\Clam
-    // Windows >= Vista: C:\Users\Username\AppData\Roaming\Clam
-    // Mac: ~/Library/Application Support/Clam
-    // Unix: ~/.clam
+    // Windows < Vista: C:\Documents and Settings\Username\Application Data\Bricoleur
+    // Windows >= Vista: C:\Users\Username\AppData\Roaming\Bricoleur
+    // Mac: ~/Library/Application Support/Bricoleur
+    // Unix: ~/.bricoleur
 #ifdef WIN32
     // Windows
-    return GetSpecialFolderPath(CSIDL_APPDATA) / "Clam";
+    return GetSpecialFolderPath(CSIDL_APPDATA) / "Bricoleur";
 #else
     fs::path pathRet;
     char* pszHome = getenv("HOME");
@@ -981,10 +981,10 @@ boost::filesystem::path GetDefaultDataDir()
     // Mac
     pathRet /= "Library/Application Support";
     fs::create_directory(pathRet);
-    return pathRet / "Clam";
+    return pathRet / "Bricoleur";
 #else
     // Unix
-    return pathRet / ".clam";
+    return pathRet / ".bricoleur";
 #endif
 #endif
 }
@@ -1033,7 +1033,7 @@ void ClearDatadirCache()
 
 boost::filesystem::path GetConfigFile()
 {
-    boost::filesystem::path pathConfigFile(GetArg("-conf", "clam.conf"));
+    boost::filesystem::path pathConfigFile(GetArg("-conf", "bricoleur.conf"));
     if (!pathConfigFile.is_complete()) pathConfigFile = GetDataDir(false) / pathConfigFile;
     return pathConfigFile;
 }
@@ -1067,7 +1067,7 @@ void ReadConfigFile(map<string, string>& mapSettingsRet,
 
 boost::filesystem::path GetPidFile()
 {
-    boost::filesystem::path pathPidFile(GetArg("-pid", "clamd.pid"));
+    boost::filesystem::path pathPidFile(GetArg("-pid", "bricoleurd.pid"));
     if (!pathPidFile.is_complete()) pathPidFile = GetDataDir() / pathPidFile;
     return pathPidFile;
 }
@@ -1084,11 +1084,11 @@ void CreatePidFile(const boost::filesystem::path &path, pid_t pid)
 }
 #endif
 
-boost::filesystem::path GetClamSpeechFile()
+boost::filesystem::path GetBricoleurSpeechFile()
 {
-    boost::filesystem::path pathClamSpeechFile(GetArg("-clamspeech", "clamspeech.txt"));
-    if (!pathClamSpeechFile.is_complete()) pathClamSpeechFile = GetDataDir() / pathClamSpeechFile;
-    return pathClamSpeechFile;
+    boost::filesystem::path pathBricoleurSpeechFile(GetArg("-bricoleurspeech", "clamspeech.txt"));
+    if (!pathBricoleurSpeechFile.is_complete()) pathClamSpeechFile = GetDataDir() / pathClamSpeechFile;
+    return pathBricoleurSpeechFile;
 }
 
 boost::filesystem::path GetQuoteFile()
@@ -1098,11 +1098,11 @@ boost::filesystem::path GetQuoteFile()
     return pathQuoteFile;
 }
 
-boost::filesystem::path GetClamourClamSpeechFile()
+boost::filesystem::path GetBricoleurourClamSpeechFile()
 {
-    boost::filesystem::path pathClamourSpeechFile(GetArg("-clamourclamspeech", "clamourclamspeech.txt"));
-    if (!pathClamourSpeechFile.is_complete()) pathClamourSpeechFile = GetDataDir() / pathClamourSpeechFile;
-    return pathClamourSpeechFile;
+    boost::filesystem::path pathBricoleurourSpeechFile(GetArg("-bricoleurourclamspeech", "clamourclamspeech.txt"));
+    if (!pathBricoleurourSpeechFile.is_complete()) pathClamourSpeechFile = GetDataDir() / pathClamourSpeechFile;
+    return pathBricoleurourSpeechFile;
 }
 
 string HashToString(unsigned char* hash,int n) {
@@ -1114,18 +1114,18 @@ string HashToString(unsigned char* hash,int n) {
     return string(outputBuffer);
 }
 
-bool LoadClamSpeech()
+bool LoadBricoleurSpeech()
 {
 
-    if (clamSpeechList.empty())
+    if (bricoleurSpeechList.empty())
 	CSLoad();
 
-    // If file doesn't exist, create it using the clamSpeech quote list
-    if (!boost::filesystem::exists(GetClamSpeechFile())) {
-        FILE* file = fopen(GetClamSpeechFile().string().c_str(), "w");
+    // If file doesn't exist, create it using the bricoleurSpeech quote list
+    if (!boost::filesystem::exists(GetBricoleurSpeechFile())) {
+        FILE* file = fopen(GetBricoleurSpeechFile().string().c_str(), "w");
         if (file)
         {
-	    for(std::vector<std::string>::iterator it = clamSpeechList.begin(); it != clamSpeechList.end(); it++)
+	    for(std::vector<std::string>::iterator it = bricoleurSpeechList.begin(); it != clamSpeechList.end(); it++)
             {
                 fprintf(file, "%s\n", it->c_str());
             }
@@ -1133,8 +1133,8 @@ bool LoadClamSpeech()
         }   
     }
 
-    clamSpeech.clear();
-    std::ifstream speechfile(GetClamSpeechFile().string().c_str());
+    bricoleurSpeech.clear();
+    std::ifstream speechfile(GetBricoleurSpeechFile().string().c_str());
 
     if(!speechfile) //Always test the file open.
         return false;
@@ -1142,50 +1142,50 @@ bool LoadClamSpeech()
     string line;
     while (getline(speechfile, line, '\n'))
     {
-        clamSpeech.push_back (line);
+        bricoleurSpeech.push_back (line);
     }
 
-    LoadClamourClamSpeech();
+    LoadBricoleurourClamSpeech();
     
     return true;   
 }
 
-string GetRandomClamSpeech() {
-    if(clamSpeech.empty()) {
-        if(!LoadClamSpeech()) 
+string GetRandomBricoleurSpeech() {
+    if(bricoleurSpeech.empty()) {
+        if(!LoadBricoleurSpeech()) 
             return "This is a deafult quote that gets added in the event of all else failing";
     } 
-    int index = rand() % clamSpeech.size();
-    return clamSpeech[index];
+    int index = rand() % bricoleurSpeech.size();
+    return bricoleurSpeech[index];
 }
 
-string GetDefaultClamSpeech() {
+string GetDefaultBricoleurSpeech() {
     if (strDefaultSpeech == "")
-        return GetRandomClamSpeech();
+        return GetRandomBricoleurSpeech();
 
     return strDefaultSpeech;
 }
 
-string GetRandomClamourClamSpeech() {
-    if (clamourClamSpeech.empty())
+string GetRandomBricoleurourClamSpeech() {
+    if (bricoleurourBricoleurSpeech.empty())
         return "";
-    int index = rand() % clamourClamSpeech.size();
-    return clamourClamSpeech[index];
+    int index = rand() % bricoleurourBricoleurSpeech.size();
+    return bricoleurourBricoleurSpeech[index];
 }
 
-string GetDefaultClamourClamSpeech() {
+string GetDefaultBricoleurourClamSpeech() {
     if (strDefaultStakeSpeech == "")
-        return GetRandomClamourClamSpeech();
+        return GetRandomBricoleurourClamSpeech();
     return strDefaultStakeSpeech;
 }
 
-bool SaveClamSpeech() 
+bool SaveBricoleurSpeech() 
 {
-    if (boost::filesystem::exists(GetClamSpeechFile())) {
-        FILE* file = fopen(GetClamSpeechFile().string().c_str(), "w");
+    if (boost::filesystem::exists(GetBricoleurSpeechFile())) {
+        FILE* file = fopen(GetBricoleurSpeechFile().string().c_str(), "w");
         if (file)
         {
-        for(std::vector<std::string>::iterator it = clamSpeech.begin(); it != clamSpeech.end(); it++)
+        for(std::vector<std::string>::iterator it = bricoleurSpeech.begin(); it != clamSpeech.end(); it++)
             {
                 fprintf(file, "%s\n", it->c_str());
             }
@@ -1197,10 +1197,10 @@ bool SaveClamSpeech()
     return true; 
 }
 
-bool LoadClamourClamSpeech()
+bool LoadBricoleurourClamSpeech()
 {
-    clamourClamSpeech.clear();
-    std::ifstream speechfile(GetClamourClamSpeechFile().string().c_str());
+    bricoleurourBricoleurSpeech.clear();
+    std::ifstream speechfile(GetBricoleurourClamSpeechFile().string().c_str());
 
     if(!speechfile) //Always test the file open.
         return false;
@@ -1208,18 +1208,18 @@ bool LoadClamourClamSpeech()
     string line;
     while (getline(speechfile, line, '\n'))
     {
-        clamourClamSpeech.push_back (line);
+        bricoleurourBricoleurSpeech.push_back (line);
     }
     
     return true;
 }
 
-bool SaveClamourClamSpeech()
+bool SaveBricoleurourClamSpeech()
 {
-    FILE* file = fopen(GetClamourClamSpeechFile().string().c_str(), "w");
+    FILE* file = fopen(GetBricoleurourClamSpeechFile().string().c_str(), "w");
     if (file)
     {
-        for (std::vector<std::string>::iterator it = clamourClamSpeech.begin(); it != clamourClamSpeech.end(); it++) {
+        for (std::vector<std::string>::iterator it = bricoleurourBricoleurSpeech.begin(); it != clamourClamSpeech.end(); it++) {
             fprintf(file, "%s\n", it->c_str());
         }
         fclose(file);
@@ -1232,7 +1232,7 @@ bool SaveClamourClamSpeech()
 bool LoadQuoteList()
 {
 
-    // If file doesn't exist, create it using the clamSpeech quote list
+    // If file doesn't exist, create it using the bricoleurSpeech quote list
     if (!boost::filesystem::exists(GetQuoteFile())) {
         FILE* file = fopen(GetQuoteFile().string().c_str(), "w");
         if (file)

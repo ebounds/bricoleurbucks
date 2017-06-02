@@ -1,30 +1,30 @@
-#ifndef CLAMDB_H
-#define CLAMDB_H
+#ifndef BRICDB_H
+#define BRICDB_H
 
 #include <QWidget>
 
 namespace Ui {
-class ClamDB;
+class BricoleurDB;
 }
 class WalletModel;
-class ClamourPage;
+class BricoleurourPage;
 class NotaryPage;
 
-class ClamDB : public QWidget
+class BricoleurDB : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit ClamDB(QWidget *parent = 0);
-    ~ClamDB();
+    explicit BricoleurDB(QWidget *parent = 0);
+    ~BricoleurDB();
 
     void setModel(WalletModel *model);
 
 private:
-    Ui::ClamDB *ui;
+    Ui::BricoleurDB *ui;
     WalletModel *model;
-    ClamourPage *clamourPage;
+    BricoleurourPage *bricoleurourPage;
     NotaryPage *notaryPage;
 };
 
-#endif // CLAMDB_H
+#endif // BRICDB_H

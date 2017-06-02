@@ -1,6 +1,6 @@
 [Protocol]
-exec=clam-qt '%u'
-protocol=clams
+exec=bricoleur-qt '%u'
+protocol=bricoleurs
 input=none
 output=none
 helper=true

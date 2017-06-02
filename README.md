@@ -1,12 +1,12 @@
 
-Clam development tree
+Bricoleur development tree
 
-Clam is a PoS-based cryptocurrency.
+Bricoleur is a PoS-based cryptocurrency.
 
 Development process
 ===========================
 
-[![Join the chat at https://gitter.im/nochowderforyou/clams](https://badges.gitter.im/nochowderforyou/clams.svg)](https://gitter.im/nochowderforyou/clams?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Join the chat at https://gitter.im/nochowderforyou/bricoleurs](https://badges.gitter.im/nochowderforyou/clams.svg)](https://gitter.im/nochowderforyou/clams?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Developers work in their own trees, then submit pull requests when
 they think their feature or bug fix is ready.
@@ -18,7 +18,7 @@ or are controversial.
 
 The master branch is regularly built and tested, but is not guaranteed
 to be completely stable. Tags are regularly created to indicate new
-stable release versions of Clam.
+stable release versions of Bricoleur.
 
 Feature branches are created when there are major new features being
 worked on by several people.

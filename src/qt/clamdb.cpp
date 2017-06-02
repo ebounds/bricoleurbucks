@@ -1,14 +1,14 @@
-#include "clamdb.h"
-#include "ui_clamdb.h"
+#include "bricoleurdb.h"
+#include "ui_bricoleurdb.h"
 #include "walletmodel.h"
-#include "clamourpage.h"
+#include "bricoleurourpage.h"
 #include "notarypage.h"
 
-ClamDB::ClamDB(QWidget *parent) :
+BricoleurDB::ClamDB(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::ClamDB),
+    ui(new Ui::BricoleurDB),
     model(0),
-    clamourPage(0),
+    bricoleurourPage(0),
     notaryPage(0)
 {
     ui->setupUi(this);
@@ -17,22 +17,22 @@ ClamDB::ClamDB(QWidget *parent) :
     ui->stackedWidget->addWidget(this->notaryPage);
     ui->pageList->addItem("Notary");
 
-    clamourPage = new ClamourPage();
-    ui->stackedWidget->addWidget(this->clamourPage);
-    ui->pageList->addItem("CLAMour");
+    bricoleurourPage = new BricoleurourPage();
+    ui->stackedWidget->addWidget(this->bricoleurourPage);
+    ui->pageList->addItem("BRICour");
 
     connect(ui->pageList, SIGNAL(currentRowChanged(int)), ui->stackedWidget, SLOT(setCurrentIndex(int)));
 }
 
-ClamDB::~ClamDB()
+BricoleurDB::~ClamDB()
 {
     delete ui;
 }
 
-void ClamDB::setModel(WalletModel *model)
+void BricoleurDB::setModel(WalletModel *model)
 {
     this->model = model;
-    this->clamourPage->setModel(model);
+    this->bricoleurourPage->setModel(model);
     this->notaryPage->setModel(model);
     ui->pageList->setCurrentRow(0);
 }

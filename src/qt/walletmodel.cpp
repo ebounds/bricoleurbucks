@@ -153,7 +153,7 @@ bool WalletModel::validateAddress(const QString &address)
     return addressParsed.IsValid();
 }
 
-WalletModel::SendCoinsReturn WalletModel::sendCoins(const QString &clamspeech, const QList<SendCoinsRecipient> &recipients, const CCoinControl *coinControl)
+WalletModel::SendCoinsReturn WalletModel::sendCoins(const QString &bricoleurspeech, const QList<SendCoinsRecipient> &recipients, const CCoinControl *coinControl)
 {
     qint64 total = 0;
     QSet<QString> setAddress;
@@ -214,11 +214,11 @@ WalletModel::SendCoinsReturn WalletModel::sendCoins(const QString &clamspeech, c
         int64_t nFeeRequired = 0;
 	
 
-       	std::string strCLAMSpeech = clamspeech.toStdString();
-        if (!strCLAMSpeech.empty())
-            strCLAMSpeech = strCLAMSpeech;
+       	std::string strBRICSpeech = bricoleurspeech.toStdString();
+        if (!strBRICSpeech.empty())
+            strBRICSpeech = strCLAMSpeech;
 
-        bool fCreated = wallet->CreateTransaction(vecSend, wtx, keyChange, nFeeRequired, strCLAMSpeech, coinControl);
+        bool fCreated = wallet->CreateTransaction(vecSend, wtx, keyChange, nFeeRequired, strBRICSpeech, coinControl);
  	if(!fCreated)
         {
             if((total + nFeeRequired) > nBalance) // FIXME: could cause collisions in the future
@@ -436,22 +436,22 @@ void WalletModel::sendNotaryTx(std::string hash)
 {
     CWalletTx wtx;
     std::string prefix = "notary";
-    std::string txError = wallet->SendCLAMSpeech(wtx, hash, prefix);
+    std::string txError = wallet->SendBRICSpeech(wtx, hash, prefix);
     emit notaryTxSent(wtx.GetHash().GetHex(), txError);
 }
 
-void WalletModel::searchClamours(std::string pid)
+void WalletModel::searchBricoleurours(std::string pid)
 {
-    CClamour *pResult(wallet->GetClamour(pid));
-    emit clamourSearchComplete(pResult);
+    CBricoleurour *pResult(wallet->GetClamour(pid));
+    emit bricoleurourSearchComplete(pResult);
 }
 
-void WalletModel::sendClamourTx(std::string hash)
+void WalletModel::sendBricoleurourTx(std::string hash)
 {
     CWalletTx wtx;
-    std::string prefix = "clamour";
-    std::string txError = wallet->SendCLAMSpeech(wtx, hash, prefix);
-    emit clamourTxSent(wtx.GetHash().GetHex(), txError);
+    std::string prefix = "bricoleurour";
+    std::string txError = wallet->SendBRICSpeech(wtx, hash, prefix);
+    emit bricoleurourTxSent(wtx.GetHash().GetHex(), txError);
 }
 
 void WalletModel::getPetitionSupport(int nWindow)

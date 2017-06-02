@@ -55,16 +55,16 @@ public:
         pchMessageStart[2] = 0x35;
         pchMessageStart[3] = 0x15;
         vAlertPubKey = ParseHex("0486bce1bac0d543f104cbff2bd23680056a3b9ea05e1137d2ff90eeb5e08472eb500322593a2cb06fbf8297d7beb6cd30cb90f98153b5b7cce1493749e41e0284");
-        nDefaultPort = 31174;
-        nRPCPort = 30174;
+        nDefaultPort = 60446;
+        nRPCPort = 60445;
         bnProofOfWorkLimit = CBigNum(~uint256(0) >> 20);
 
         // Build the genesis block. Note that the output of the genesis coinbase cannot
         // be spent as it did not originally exist in the database.
         //
-        const char* pszTimestamp = "14/Apr/2014 No chowder for you, cause clams have feelings too";
+        const char* pszTimestamp = "2017-06-02 Giant sloth remains found in Los Angeles www.bbc.com/news/world-us-canada-40140565";
         CTransaction txNew;
-        txNew.nTime = 1397512438;
+        txNew.nTime = 1496439510;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
         txNew.vin[0].scriptSig = CScript() << 0 << CBigNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
@@ -73,7 +73,7 @@ public:
         genesis.hashPrevBlock = 0;
         genesis.hashMerkleRoot = genesis.BuildMerkleTree();
         genesis.nVersion = 1;
-        genesis.nTime    = 1397512438;
+        genesis.nTime    = 1496439510;
         genesis.nBits    = bnProofOfWorkLimit.GetCompact();
         genesis.nNonce   = 2054231;
 
@@ -81,18 +81,18 @@ public:
         assert(hashGenesisBlock == uint256("0x00000c3ce6b3d823a35224a39798eca9ad889966aeb5a9da7b960ffb9869db35"));
         assert(genesis.hashMerkleRoot == uint256("0xef10b32afd53e4a6ebb8bdb0486c6acbe9b43afe3dfa538e913b89bb1319ff96"));
 
-        // push peer seeders running this network crawler: https://github.com/dooglus/bitcoin-seeder/tree/clam
-        PUSH_SEED("clam.just-dice.com")
+        // push peer seeders running this network crawler: https://github.com/dooglus/bitcoin-seeder/tree/bricoleur
+        PUSH_SEED("bricoleur.just-dice.com")
 
         // BIP32 version bytes:
         //    public: 0xa8c26d64 ("cpubk...")
         //   private: 0xa8c17826 ("cprvk...")
         //
-        // http://doc.satoshilabs.com/slips/slip-0044.html gives the CLAM coin type version as 23 (0x80000017)
+        // http://doc.satoshilabs.com/slips/slip-0044.html gives the BRIC coin type version as 23 (0x80000017)
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,137);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,13);
-        //CLAM Secret key, from old base58.h (release 1.4.2.1)  == 5 + 128
+        //BRIC Secret key, from old base58.h (release 1.4.2.1)  == 5 + 128
         base58Prefixes[SECRET_KEY]     = std::vector<unsigned char>(1,133);
         //BTC, LTC and DOGE secret keys
         base58Prefixes[SECRET_KEY_BTC] = std::vector<unsigned char>(1,128);

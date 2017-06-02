@@ -31,7 +31,7 @@ Release Process
 
 	export SIGNER=(your gitian key, ie bluematt, sipa, etc)
 	export VERSION=(new version, e.g. 0.8.0)
-	pushd ./clams
+	pushd ./bricoleurs
 	git checkout v${VERSION}
 	popd
 	pushd ./gitian-builder
@@ -52,29 +52,29 @@ Release Process
 
   By default, gitian will fetch source files as needed. For offline builds, they can be fetched ahead of time:
 
-	make -C ../clams/depends download SOURCES_PATH=`pwd`/cache/common
+	make -C ../bricoleurs/depends download SOURCES_PATH=`pwd`/cache/common
 
   Only missing files will be fetched, so this is safe to re-run for each build.
 
 ###Build Bitcoin Core for Linux, Windows, and OS X:
 
-	./bin/gbuild --commit clams=v${VERSION} ../clams/contrib/gitian-descriptors/gitian-linux.yml
-	./bin/gsign --signer $SIGNER --release ${VERSION}-linux --destination ../gitian.sigs/ ../clams/contrib/gitian-descriptors/gitian-linux.yml
-	mv build/out/clam*.tar.gz build/out/src/clam-*.tar.gz ../
-	./bin/gbuild --commit clams=v${VERSION} ../clams/contrib/gitian-descriptors/gitian-win.yml
-	./bin/gsign --signer $SIGNER --release ${VERSION}-win --destination ../gitian.sigs/ ../clams/contrib/gitian-descriptors/gitian-win.yml
-	mv build/out/clam-*.zip build/out/clam-*.exe ../
-	./bin/gbuild --commit clams=v${VERSION} ../clams/contrib/gitian-descriptors/gitian-osx.yml
-	./bin/gsign --signer $SIGNER --release ${VERSION}-osx-unsigned --destination ../gitian.sigs/ ../clams/contrib/gitian-descriptors/gitian-osx.yml
-	mv build/out/clam-*-unsigned.tar.gz inputs/clam-osx-unsigned.tar.gz
-	mv build/out/clam-*.tar.gz build/out/clam-*.dmg ../
+	./bin/gbuild --commit bricoleurs=v${VERSION} ../clams/contrib/gitian-descriptors/gitian-linux.yml
+	./bin/gsign --signer $SIGNER --release ${VERSION}-linux --destination ../gitian.sigs/ ../bricoleurs/contrib/gitian-descriptors/gitian-linux.yml
+	mv build/out/bricoleur*.tar.gz build/out/src/clam-*.tar.gz ../
+	./bin/gbuild --commit bricoleurs=v${VERSION} ../clams/contrib/gitian-descriptors/gitian-win.yml
+	./bin/gsign --signer $SIGNER --release ${VERSION}-win --destination ../gitian.sigs/ ../bricoleurs/contrib/gitian-descriptors/gitian-win.yml
+	mv build/out/bricoleur-*.zip build/out/clam-*.exe ../
+	./bin/gbuild --commit bricoleurs=v${VERSION} ../clams/contrib/gitian-descriptors/gitian-osx.yml
+	./bin/gsign --signer $SIGNER --release ${VERSION}-osx-unsigned --destination ../gitian.sigs/ ../bricoleurs/contrib/gitian-descriptors/gitian-osx.yml
+	mv build/out/bricoleur-*-unsigned.tar.gz inputs/clam-osx-unsigned.tar.gz
+	mv build/out/bricoleur-*.tar.gz build/out/clam-*.dmg ../
 	popd
   Build output expected:
 
-  1. source tarball (clam-${VERSION}.tar.gz)
-  2. linux 32-bit and 64-bit binaries dist tarballs (clam-${VERSION}-linux[32|64].tar.gz)
-  3. windows 32-bit and 64-bit installers and dist zips (clam-${VERSION}-win[32|64]-setup.exe, clam-${VERSION}-win[32|64].zip)
-  4. OSX unsigned installer (clam-${VERSION}-osx-unsigned.dmg)
+  1. source tarball (bricoleur-${VERSION}.tar.gz)
+  2. linux 32-bit and 64-bit binaries dist tarballs (bricoleur-${VERSION}-linux[32|64].tar.gz)
+  3. windows 32-bit and 64-bit installers and dist zips (bricoleur-${VERSION}-win[32|64]-setup.exe, clam-${VERSION}-win[32|64].zip)
+  4. OSX unsigned installer (bricoleur-${VERSION}-osx-unsigned.dmg)
   5. Gitian signatures (in gitian.sigs/${VERSION}-<linux|win|osx-unsigned>/(your gitian key)/
 
 ###Next steps:
@@ -98,9 +98,9 @@ Commit your signature to gitian.sigs:
 	pushd ./gitian-builder
 	# Fetch the signature as instructed by Gavin
 	cp signature.tar.gz inputs/
-	./bin/gbuild -i ../clams/contrib/gitian-descriptors/gitian-osx-signer.yml
-	./bin/gsign --signer $SIGNER --release ${VERSION}-osx-signed --destination ../gitian.sigs/ ../clams/contrib/gitian-descriptors/gitian-osx-signer.yml
-	mv build/out/clam-${VERSION}-osx.dmg ../
+	./bin/gbuild -i ../bricoleurs/contrib/gitian-descriptors/gitian-osx-signer.yml
+	./bin/gsign --signer $SIGNER --release ${VERSION}-osx-signed --destination ../gitian.sigs/ ../bricoleurs/contrib/gitian-descriptors/gitian-osx-signer.yml
+	mv build/out/bricoleur-${VERSION}-osx.dmg ../
 	popd
 
 Commit your signature for the signed OSX binary:
@@ -129,17 +129,17 @@ rm SHA256SUMS
 ```
 (the digest algorithm is forced to sha256 to avoid confusion of the `Hash:` header that GPG adds with the SHA256 used for the files)
 
-- Upload zips and installers, as well as `SHA256SUMS.asc` from last step, to the clamclient.com server
+- Upload zips and installers, as well as `SHA256SUMS.asc` from last step, to the bricoleurclient.com server
 
-- Update clamclient.com version
+- Update bricoleurclient.com version
 
 - Announce the release:
 
   - Release sticky on bitcointalk: https://bitcointalk.org/index.php?topic=623147.0
 
-  - Update title of #clams on Freenode IRC
+  - Update title of #bricoleurs on Freenode IRC
 
-  - Optionally reddit /r/ClamClient, ... but this will usually sort out itself
+  - Optionally reddit /r/BricoleurClient, ... but this will usually sort out itself
 
 - Add release notes for the new version to the directory `doc/release-notes` in git master
 

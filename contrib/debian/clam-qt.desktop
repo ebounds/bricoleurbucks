@@ -1,12 +1,12 @@
 [Desktop Entry]
 Encoding=UTF-8
-Name=Clams
-Comment=Clams P2P Cryptocurrency
-Comment[fr]=Clams, monnaie virtuelle cryptographique pair à pair
-Comment[tr]=Clams, eşten eşe kriptografik sanal para birimi
-Exec=/usr/bin/clam-qt
+Name=Bricoleurs
+Comment=Bricoleurs P2P Cryptocurrency
+Comment[fr]=Bricoleurs, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=Bricoleurs, eşten eşe kriptografik sanal para birimi
+Exec=/usr/bin/bricoleur-qt
 Terminal=false
 Type=Application
-Icon=/usr/share/pixmaps/clams80.xpm
-MimeType=x-scheme-handler/clams;
+Icon=/usr/share/pixmaps/bricoleurs80.xpm
+MimeType=x-scheme-handler/bricoleurs;
 Categories=Office;

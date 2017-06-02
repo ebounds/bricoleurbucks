@@ -5,29 +5,29 @@
 #build/bitcoind::
 #	$(if $(filter nocheck,$(DEB_BUILD_OPTIONS)),,src/test_bitcoin)
 
-DEB_INSTALL_EXAMPLES_clamd += debian/examples/*
-DEB_INSTALL_MANPAGES_clamd += debian/manpages/*
+DEB_INSTALL_EXAMPLES_bricoleurd += debian/examples/*
+DEB_INSTALL_MANPAGES_bricoleurd += debian/manpages/*
 
 %:
 	dh --with bash-completion $@
 
 override_dh_auto_build:
-	cd src; $(MAKE) -f makefile.unix clamd
+	cd src; $(MAKE) -f makefile.unix bricoleurd
 	$(MAKE)
 
 override_dh_auto_clean:
-	if [ -f Makefile ]; then $(MAKE) clean; else rm -rf build/; rm -f clam-qt; fi
+	if [ -f Makefile ]; then $(MAKE) clean; else rm -rf build/; rm -f bricoleur-qt; fi
 	cd src; $(MAKE) -f makefile.unix clean
 
 override_dh_auto_configure:
-	qmake clam-qt.pro USE_QRCODE=1
+	qmake bricoleur-qt.pro USE_QRCODE=1
 
 override_dh_auto_test:
-	cd src; $(MAKE) -f makefile.unix test_clams
+	cd src; $(MAKE) -f makefile.unix test_bricoleurs
 	src/test_novacoin
 
 # Ensure wrapper is set executable
-binary-post-install/clamd:
-	chmod +x $(cdbs_curdestdir)usr/bin/clamd
-binary-post-install/clam-qt:
-	chmod +x $(cdbs_curdestdir)usr/bin/clam-qt
+binary-post-install/bricoleurd:
+	chmod +x $(cdbs_curdestdir)usr/bin/bricoleurd
+binary-post-install/bricoleur-qt:
+	chmod +x $(cdbs_curdestdir)usr/bin/bricoleur-qt

@@ -1,9 +1,9 @@
-Building Clam
+Building Bricoleur
 
-See doc/readme-qt.rst for instructions on building Clam QT,
+See doc/readme-qt.rst for instructions on building Bricoleur QT,
 the intended-for-end-users, nice-graphical-interface, reference
-implementation of Clam.
+implementation of Bricoleur.
 
-See doc/build-*.txt for instructions on building clamd,
+See doc/build-*.txt for instructions on building bricoleurd,
 the intended-for-services, no-graphical-interface, reference
-implementation of Clam.
+implementation of Bricoleur.

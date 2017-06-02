@@ -51,12 +51,12 @@ bool AppInit(int argc, char* argv[])
         if (mapArgs.count("-?") || mapArgs.count("--help"))
         {
             // First part of help message is specific to bitcoind / RPC client
-            std::string strUsage = _("Clam version") + " " + FormatFullVersion() + "\n\n" +
+            std::string strUsage = _("Bricoleur version") + " " + FormatFullVersion() + "\n\n" +
                 _("Usage:") + "\n" +
-                  "  Clamd [options]                     " + "\n" +
-                  "  Clamd [options] <command> [params]  " + _("Send command to -server or Clamd") + "\n" +
-                  "  Clamd [options] help                " + _("List commands") + "\n" +
-                  "  Clamd [options] help <command>      " + _("Get help for a command") + "\n";
+                  "  Bricoleurd [options]                     " + "\n" +
+                  "  Bricoleurd [options] <command> [params]  " + _("Send command to -server or Clamd") + "\n" +
+                  "  Bricoleurd [options] help                " + _("List commands") + "\n" +
+                  "  Bricoleurd [options] help <command>      " + _("Get help for a command") + "\n";
 
             strUsage += "\n" + HelpMessage();
 
@@ -66,7 +66,7 @@ bool AppInit(int argc, char* argv[])
 
         // Command-line RPC
         for (int i = 1; i < argc; i++)
-            if (!IsSwitchChar(argv[i][0]) && !boost::algorithm::istarts_with(argv[i], "Clam:"))
+            if (!IsSwitchChar(argv[i][0]) && !boost::algorithm::istarts_with(argv[i], "Bricoleur:"))
                 fCommandLine = true;
 
         if (fCommandLine)

@@ -1,2 +1,2 @@
-debian/bin/clamd usr/bin
-src/clamd usr/lib/clam/
+debian/bin/bricoleurd usr/bin
+src/bricoleurd usr/lib/clam/

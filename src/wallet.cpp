@@ -6,7 +6,7 @@
 #include "wallet.h"
 
 #include "base58.h"
-#include "clamspeech.h"
+#include "bricoleurspeech.h"
 #include "coincontrol.h"
 #include "kernel.h"
 #include "net.h"
@@ -45,7 +45,7 @@ extern bool fStakeTo, fRewardTo;
 extern set<CBitcoinAddress> setSpendLastAddresses;
 extern set<CBitcoinAddress> setStakeAddresses;
 
-extern map<string, CClamour*> mapClamour;
+extern map<string, CBricoleurour*> mapClamour;
 
 int64_t gcd(int64_t n,int64_t m) { return m == 0 ? n : gcd(m, n % m); }
 static inline uint64_t CoinWeightCost(const COutput &out)
@@ -424,7 +424,7 @@ void CWallet::WalletUpdateSpent(const CTransaction &tx, bool fBlock)
                     LogPrintf("WalletUpdateSpent: bad wtx %s\n", wtx.GetHash().ToString());
                 else if (!wtx.IsSpent(txin.prevout.n) && IsMine(wtx.vout[txin.prevout.n]))
                 {
-                    LogPrintf("WalletUpdateSpent found spent coin %s CLAM %s\n", FormatMoney(GetCredit(wtx.vout[txin.prevout.n])), wtx.GetHash().ToString());
+                    LogPrintf("WalletUpdateSpent found spent coin %s BRIC %s\n", FormatMoney(GetCredit(wtx.vout[txin.prevout.n])), wtx.GetHash().ToString());
                     wtx.MarkSpent(txin.prevout.n);
                     wtx.WriteToDisk();
                     NotifyTransactionChanged(this, txin.prevout.hash, CT_UPDATED);
@@ -1017,7 +1017,7 @@ void CWallet::ReacceptWalletTransactions()
                 }
                 if (fUpdated)
                 {
-                    LogPrintf("ReacceptWalletTransactions found spent coin %s CLAM %s\n", FormatMoney(wtx.GetCredit()), wtx.GetHash().ToString());
+                    LogPrintf("ReacceptWalletTransactions found spent coin %s BRIC %s\n", FormatMoney(wtx.GetCredit()), wtx.GetHash().ToString());
                     wtx.MarkDirty();
                     wtx.WriteToDisk();
                 }
@@ -1813,7 +1813,7 @@ bool CWallet::SelectCoinsForStaking(int64_t nTargetValue, unsigned int nSpendTim
     return true;
 }
 
-bool CWallet::CreateTransaction(const vector<pair<CScript, int64_t> >& vecSend, CWalletTx& wtxNew, CReserveKey& reservekey, int64_t& nFeeRet, std::string strCLAMSpeech, const CCoinControl* coinControl)
+bool CWallet::CreateTransaction(const vector<pair<CScript, int64_t> >& vecSend, CWalletTx& wtxNew, CReserveKey& reservekey, int64_t& nFeeRet, std::string strBRICSpeech, const CCoinControl* coinControl)
 {
     int64_t nValue = 0;
     BOOST_FOREACH (const PAIRTYPE(CScript, int64_t)& s, vecSend)
@@ -1831,13 +1831,13 @@ bool CWallet::CreateTransaction(const vector<pair<CScript, int64_t> >& vecSend, 
 
     wtxNew.BindWallet(this);
 
-    // set clamSpeech when creating a transaction
-    if (strCLAMSpeech.empty() && !(mapArgs["-clamspeech"] == "off"))
-        strCLAMSpeech = GetDefaultClamSpeech();
+    // set bricoleurSpeech when creating a transaction
+    if (strBRICSpeech.empty() && !(mapArgs["-bricoleurspeech"] == "off"))
+        strBRICSpeech = GetDefaultBricoleurSpeech();
 
-    wtxNew.strCLAMSpeech = strCLAMSpeech;
-    if (wtxNew.strCLAMSpeech.length() > MAX_TX_COMMENT_LEN)
-        wtxNew.strCLAMSpeech.resize(MAX_TX_COMMENT_LEN);
+    wtxNew.strBRICSpeech = strCLAMSpeech;
+    if (wtxNew.strBRICSpeech.length() > MAX_TX_COMMENT_LEN)
+        wtxNew.strBRICSpeech.resize(MAX_TX_COMMENT_LEN);
 
     {
         LOCK2(cs_main, cs_wallet);
@@ -1972,12 +1972,12 @@ bool CWallet::CreateTransaction(const vector<pair<CScript, int64_t> >& vecSend, 
     return true;
 }
 
-bool CWallet::CreateTransaction(CScript scriptPubKey, int64_t nValue, int64_t nCount, CWalletTx& wtxNew, CReserveKey& reservekey, int64_t& nFeeRet, std::string strCLAMSpeech, const CCoinControl* coinControl)
+bool CWallet::CreateTransaction(CScript scriptPubKey, int64_t nValue, int64_t nCount, CWalletTx& wtxNew, CReserveKey& reservekey, int64_t& nFeeRet, std::string strBRICSpeech, const CCoinControl* coinControl)
 {
     vector< pair<CScript, int64_t> > vecSend;
     while (nCount--)
         vecSend.push_back(make_pair(scriptPubKey, nValue));
-    return CreateTransaction(vecSend, wtxNew, reservekey, nFeeRet, strCLAMSpeech, coinControl);
+    return CreateTransaction(vecSend, wtxNew, reservekey, nFeeRet, strBRICSpeech, coinControl);
 }
 
 bool CWallet::GetStakeWeight(uint64_t& nWeight)
@@ -2112,7 +2112,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
         {
             LOCK2(cs_main, cs_wallet);
             if (!txdb.ReadTxIndex(pcoin.first->hash, txindex)) {
-                LogPrint("stake", "[STAKE] skip %s:%-3d (%s CLAM) - can't read txindex\n",
+                LogPrint("stake", "[STAKE] skip %s:%-3d (%s BRIC) - can't read txindex\n",
                           pcoin.first->hash.ToString(), pcoin.second, FormatMoney(pcoin.first->vout[pcoin.second].nValue));
                 continue;
             }
@@ -2123,7 +2123,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
         {
             LOCK2(cs_main, cs_wallet);
             if (!block.ReadFromDisk(txindex.pos.nFile, txindex.pos.nBlockPos, false)) {
-                LogPrint("stake", "[STAKE] skip %s:%-3d (%s CLAM) - can't read block\n",
+                LogPrint("stake", "[STAKE] skip %s:%-3d (%s BRIC) - can't read block\n",
                           pcoin.first->hash.ToString(), pcoin.second, FormatMoney(pcoin.first->vout[pcoin.second].nValue));
                 continue;
             }
@@ -2132,7 +2132,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
         static int nMaxStakeSearchInterval = 60;
         nBlockTime = block.GetBlockTime();
         if (nBlockTime + nStakeMinAge > txNew.nTime - nMaxStakeSearchInterval) {
-            LogPrint("stake", "[STAKE] skip %s:%-3d (%s CLAM) - only %d minutes old\n",
+            LogPrint("stake", "[STAKE] skip %s:%-3d (%s BRIC) - only %d minutes old\n",
                       pcoin.first->hash.ToString(), pcoin.second, FormatMoney(pcoin.first->vout[pcoin.second].nValue),
                       (txNew.nTime - nMaxStakeSearchInterval - nBlockTime) / 60);
             continue; // only count coins meeting min age requirement
@@ -2146,7 +2146,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
             // Search nSearchInterval seconds back up to nMaxStakeSearchInterval
             uint256 targetProofOfStake = 0;
             COutPoint prevoutStake = COutPoint(pcoin.first->hash, pcoin.second);
-            LogPrint("stake", "[STAKE] check %s:%-3d (%s CLAM)\n",
+            LogPrint("stake", "[STAKE] check %s:%-3d (%s BRIC)\n",
                       pcoin.first->hash.ToString(), pcoin.second, FormatMoney(pcoin.first->vout[pcoin.second].nValue));
             if (CheckStakeKernelHash(pindexPrev, nBits, block, txindex.pos.nTxPos - txindex.pos.nBlockPos, *pcoin.first, prevoutStake, txNew.nTime - n, hashProofOfStake, targetProofOfStake))
             {
@@ -2158,14 +2158,14 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
                 scriptPubKeyKernel = pcoin.first->vout[pcoin.second].scriptPubKey;
                 if (!Solver(scriptPubKeyKernel, whichType, vSolutions))
                 {
-                    LogPrint("stake", "[STAKE] fail %s:%-3d (%s CLAM) - can't parse kernel\n",
+                    LogPrint("stake", "[STAKE] fail %s:%-3d (%s BRIC) - can't parse kernel\n",
                               pcoin.first->hash.ToString(), pcoin.second, FormatMoney(pcoin.first->vout[pcoin.second].nValue));
                     break;
                 }
                 LogPrint("coinstake", "CreateCoinStake : parsed kernel type=%d\n", whichType);
                 if (whichType != TX_PUBKEY && whichType != TX_PUBKEYHASH)
                 {
-                    LogPrint("stake", "[STAKE] fail %s:%-3d (%s CLAM) - bad kernel type\n",
+                    LogPrint("stake", "[STAKE] fail %s:%-3d (%s BRIC) - bad kernel type\n",
                               pcoin.first->hash.ToString(), pcoin.second, FormatMoney(pcoin.first->vout[pcoin.second].nValue));
                     break;  // only support pay to public key and pay to address
                 }
@@ -2175,7 +2175,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
                     stakingkeyID = uint160(vSolutions[0]);
                     if (!keystore.GetKey(stakingkeyID, key))
                     {
-                        LogPrint("stake", "[STAKE] fail %s:%-3d (%s CLAM) - can't get public key (a)\n",
+                        LogPrint("stake", "[STAKE] fail %s:%-3d (%s BRIC) - can't get public key (a)\n",
                                   pcoin.first->hash.ToString(), pcoin.second, FormatMoney(pcoin.first->vout[pcoin.second].nValue));
                         break;  // unable to find corresponding public key
                     }
@@ -2187,7 +2187,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
                     stakingkeyID = Hash160(vchPubKey);
                     if (!keystore.GetKey(stakingkeyID, key))
                     {
-                        LogPrint("stake", "[STAKE] fail %s:%-3d (%s CLAM) - can't get public key, type %d\n",
+                        LogPrint("stake", "[STAKE] fail %s:%-3d (%s BRIC) - can't get public key, type %d\n",
                                   pcoin.first->hash.ToString(), pcoin.second, FormatMoney(pcoin.first->vout[pcoin.second].nValue),
                                   whichType);
                         LogPrint("coinstake", "CreateCoinStake : failed to get key for kernel type=%d\n", whichType);
@@ -2196,7 +2196,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
 
                     if (key.GetPubKey() != vchPubKey)
                     {
-                        LogPrint("stake", "[STAKE] fail %s:%-3d (%s CLAM) - invalid key, type %d\n",
+                        LogPrint("stake", "[STAKE] fail %s:%-3d (%s BRIC) - invalid key, type %d\n",
                                   pcoin.first->hash.ToString(), pcoin.second, FormatMoney(pcoin.first->vout[pcoin.second].nValue),
                                   whichType);
                         break; // keys mismatch
@@ -2241,17 +2241,17 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
             nCredit += nReward;
     }
 
-    // set clamSpeech when staking a block
-    if (!(mapArgs["-clamstake"] == "off")) {
+    // set bricoleurSpeech when staking a block
+    if (!(mapArgs["-bricoleurstake"] == "off")) {
         if (weightedStakeSpeech.size()) {
-            txNew.strCLAMSpeech = weightedStakeSpeech.select(hashProofOfStake.Get64());
-        } else if(GetDefaultClamourClamSpeech() == "") {
-            txNew.strCLAMSpeech = GetDefaultClamSpeech();
+            txNew.strBRICSpeech = weightedStakeSpeech.select(hashProofOfStake.Get64());
+        } else if(GetDefaultBricoleurourClamSpeech() == "") {
+            txNew.strBRICSpeech = GetDefaultBricoleurSpeech();
         } else {
-            txNew.strCLAMSpeech = GetDefaultClamourClamSpeech();
+            txNew.strBRICSpeech = GetDefaultBricoleurourClamSpeech();
         }
-        if (txNew.strCLAMSpeech.length() > MAX_TX_COMMENT_LEN)
-            txNew.strCLAMSpeech.resize(MAX_TX_COMMENT_LEN);
+        if (txNew.strBRICSpeech.length() > MAX_TX_COMMENT_LEN)
+            txNew.strBRICSpeech.resize(MAX_TX_COMMENT_LEN);
     }
 
     CScript scriptStakeTo;
@@ -2436,22 +2436,22 @@ string CWallet::SendMoney(CScript scriptPubKey, int64_t nValue, int64_t nCount, 
     return "";
 }
 
-string CWallet::SendCLAMSpeech(CWalletTx& wtxNew, string clamSpeech, string prefix, bool fAskFee)
+string CWallet::SendBRICSpeech(CWalletTx& wtxNew, string bricoleurSpeech, string prefix, bool fAskFee)
 { 
     if (prefix == "notary") 
     {
         uint256 hash;
-        hash.SetHex(clamSpeech);
-        clamSpeech = "notary " + hash.GetHex();
+        hash.SetHex(bricoleurSpeech);
+        bricoleurSpeech = "notary " + hash.GetHex();
 
     } 
-    else if (prefix == "clamour") 
+    else if (prefix == "bricoleurour") 
     {
-        clamSpeech = "create clamour " + clamSpeech;
+        bricoleurSpeech = "create clamour " + clamSpeech;
     } 
     else if (prefix.length() > 0)
     {
-        clamSpeech = prefix + clamSpeech;
+        bricoleurSpeech = prefix + clamSpeech;
     } 
 
     CReserveKey reservekey(this);
@@ -2475,7 +2475,7 @@ string CWallet::SendCLAMSpeech(CWalletTx& wtxNew, string clamSpeech, string pref
         LogPrintf("SendNotary() : %s", strError);
         return strError;
     }
-    if (!CreateCLAMSpeechTransaction(wtxNew, reservekey, nFeeRequired, clamSpeech))
+    if (!CreateBRICSpeechTransaction(wtxNew, reservekey, nFeeRequired, bricoleurSpeech))
     {
         string strError;
         if (nFeeRequired > GetBalance())
@@ -2498,14 +2498,14 @@ string CWallet::SendCLAMSpeech(CWalletTx& wtxNew, string clamSpeech, string pref
 
 }
 
-bool CWallet::CreateCLAMSpeechTransaction(CWalletTx& wtxNew, CReserveKey& reservekey, int64_t& nFeeRet, std::string clamSpeech, const CCoinControl* coinControl) 
+bool CWallet::CreateBRICSpeechTransaction(CWalletTx& wtxNew, CReserveKey& reservekey, int64_t& nFeeRet, std::string bricoleurSpeech, const CCoinControl* coinControl) 
 {
 	//vector< pair<CScript, int64_t> > vecSend;
 	//vecSend.push_back(make_pair(scriptPubKey, nValue));
 
 	wtxNew.BindWallet(this);
 
-    wtxNew.strCLAMSpeech = clamSpeech;   
+    wtxNew.strBRICSpeech = bricoleurSpeech;   
 
 	{
 		LOCK2(cs_main, cs_wallet);
@@ -3004,7 +3004,7 @@ void CWallet::FixSpentCoins(int& nMismatchFound, int64_t& nBalanceInQuestion, bo
         {
             if (IsMine(pcoin->vout[n]) && pcoin->IsSpent(n) && (txindex.vSpent.size() <= n || txindex.vSpent[n].IsNull()))
             {
-                LogPrintf("FixSpentCoins found lost coin %s CLAM %s[%d], %s\n",
+                LogPrintf("FixSpentCoins found lost coin %s BRIC %s[%d], %s\n",
                     FormatMoney(pcoin->vout[n].nValue).c_str(), pcoin->GetHash().ToString(), n, fCheckOnly? "repair not attempted" : "repairing");
                 nMismatchFound++;
                 nBalanceInQuestion += pcoin->vout[n].nValue;
@@ -3016,7 +3016,7 @@ void CWallet::FixSpentCoins(int& nMismatchFound, int64_t& nBalanceInQuestion, bo
             }
             else if (IsMine(pcoin->vout[n]) && !pcoin->IsSpent(n) && (txindex.vSpent.size() > n && !txindex.vSpent[n].IsNull()))
             {
-                LogPrintf("FixSpentCoins found spent coin %s CLAM %s[%d], %s\n",
+                LogPrintf("FixSpentCoins found spent coin %s BRIC %s[%d], %s\n",
                     FormatMoney(pcoin->vout[n].nValue).c_str(), pcoin->GetHash().ToString(), n, fCheckOnly? "repair not attempted" : "repairing");
                 nMismatchFound++;
                 nBalanceInQuestion += pcoin->vout[n].nValue;
@@ -3219,7 +3219,7 @@ void CWallet::GetKeyBirthTimes(std::map<CKeyID, int64_t> &mapKeyBirth) const {
 void CWallet::SearchNotaryTransactions(uint256 hash, std::vector<std::pair<std::string, int> >& vTxResults)
 {
     int blockstogoback = pindexBest->nHeight - 362500;
-    std::string matchingCLAMSpeech = "notary " + hash.GetHex();
+    std::string matchingBRICSpeech = "notary " + hash.GetHex();
 
     const CBlockIndex* pindexFirst = pindexBest;
     for (int i = 0; pindexFirst && i < blockstogoback; i++) {
@@ -3229,7 +3229,7 @@ void CWallet::SearchNotaryTransactions(uint256 hash, std::vector<std::pair<std::
 
         BOOST_FOREACH (const CTransaction& tx, block.vtx)
         {
-            if (tx.strCLAMSpeech == matchingCLAMSpeech) {
+            if (tx.strBRICSpeech == matchingCLAMSpeech) {
                 vTxResults.push_back( std::make_pair(tx.GetHash().GetHex(), pindexFirst->nHeight) );
             }
         }
@@ -3239,11 +3239,11 @@ void CWallet::SearchNotaryTransactions(uint256 hash, std::vector<std::pair<std::
     return;
 }
 
-CClamour* CWallet::GetClamour(std::string pid)
+CBricoleurour* CWallet::GetClamour(std::string pid)
 {
-    std::map<std::string, CClamour*>::iterator mi = mapClamour.find(pid);
-    CClamour *pResult(NULL);
-    if (mi == mapClamour.end())
+    std::map<std::string, CBricoleurour*>::iterator mi = mapClamour.find(pid);
+    CBricoleurour *pResult(NULL);
+    if (mi == mapBricoleurour.end())
         return pResult;
     pResult = mi->second;
     return pResult;

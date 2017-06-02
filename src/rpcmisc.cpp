@@ -4,7 +4,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "base58.h"
-#include "clamspeech.h"
+#include "bricoleurspeech.h"
 #include "init.h"
 #include "main.h"
 #include "net.h"
@@ -28,8 +28,8 @@ using namespace std;
 using namespace boost;
 using namespace boost::assign;
 
-typedef map<string, CClamour*> mapClamour_t;
-extern  mapClamour_t mapClamour;
+typedef map<string, CBricoleurour*> mapClamour_t;
+extern  mapBricoleurour_t mapClamour;
 
 UniValue getinfo(const UniValue& params, bool fHelp)
 {
@@ -123,8 +123,8 @@ UniValue validateaddress(const UniValue& params, bool fHelp)
 {
     if (fHelp || params.size() != 1)
         throw runtime_error(
-            "validateaddress <clamaddress>\n"
-            "Return information about <clamaddress>.");
+            "validateaddress <bricoleuraddress>\n"
+            "Return information about <bricoleuraddress>.");
 
     CBitcoinAddress address(params[0].get_str());
     bool isValid = address.IsValid();
@@ -317,8 +317,8 @@ UniValue validatepubkey(const UniValue& params, bool fHelp)
 {
     if (fHelp || !params.size() || params.size() > 2)
         throw runtime_error(
-            "validatepubkey <clampubkey>\n"
-            "Return information about <clampubkey>.");
+            "validatepubkey <bricoleurpubkey>\n"
+            "Return information about <bricoleurpubkey>.");
 
     std::vector<unsigned char> vchPubKey = ParseHex(params[0].get_str());
     CPubKey pubKey(vchPubKey);
@@ -356,7 +356,7 @@ UniValue verifymessage(const UniValue& params, bool fHelp)
 {
     if (fHelp || params.size() != 3)
         throw runtime_error(
-            "verifymessage <clamaddress> <signature> <message>\n"
+            "verifymessage <bricoleuraddress> <signature> <message>\n"
             "Verify a signed message");
 
     string strAddress  = params[0].get_str();
@@ -480,36 +480,36 @@ UniValue setweightedstakespeech(const UniValue& params, bool fHelp)
     return strprintf("loaded %d weighted stake speech text(s)", weightedStakeSpeech.size());
 }
 
-UniValue getclamour(const UniValue& params, bool fHelp)
+UniValue getbricoleurour(const UniValue& params, bool fHelp)
 {
     if (fHelp || params.size() != 1)
         throw runtime_error(
-            "getclamour <pid>\n"
+            "getbricoleurour <pid>\n"
             "Returns an object containing info about the specified petition ID");
 
     string pid = params[0].get_str();
 
-    map<string, CClamour*>::iterator mi = mapClamour.find(pid);
-    if (mi == mapClamour.end())
+    map<string, CBricoleurour*>::iterator mi = mapClamour.find(pid);
+    if (mi == mapBricoleurour.end())
         return NullUniValue;
 
     UniValue ret(UniValue::VOBJ);
-    CClamour *clamour = mi->second;
+    CBricoleurour *bricoleurour = mi->second;
 
     ret.push_back(Pair("pid", pid));
-    ret.push_back(Pair("hash", clamour->strHash));
-    if (clamour->strURL.length())
-        ret.push_back(Pair("url", clamour->strURL));
-    ret.push_back(Pair("txid", clamour->txid.GetHex()));
-    ret.push_back(Pair("confirmations", pindexBest->nHeight - clamour->nHeight + 1));
+    ret.push_back(Pair("hash", bricoleurour->strHash));
+    if (bricoleurour->strURL.length())
+        ret.push_back(Pair("url", bricoleurour->strURL));
+    ret.push_back(Pair("txid", bricoleurour->txid.GetHex()));
+    ret.push_back(Pair("confirmations", pindexBest->nHeight - bricoleurour->nHeight + 1));
     return ret;
 }
 
-UniValue listclamours(const UniValue& params, bool fHelp)
+UniValue listbricoleurours(const UniValue& params, bool fHelp)
 {
     if (fHelp || params.size() > 2)
         throw runtime_error(
-            "listclamours [minconf=1] [maxconf=9999999]\n"
+            "listbricoleurours [minconf=1] [maxconf=9999999]\n"
             "Returns an array of objects containing info about all registered petitions\n"
             "with between minconf and maxconf (inclusive) confirmations.");
 
@@ -525,21 +525,21 @@ UniValue listclamours(const UniValue& params, bool fHelp)
 
     UniValue ret(UniValue::VARR);
 
-    BOOST_FOREACH(const mapClamour_t::value_type pair, mapClamour)
+    BOOST_FOREACH(const mapBricoleurour_t::value_type pair, mapClamour)
     {
-        CClamour *clamour = pair.second;
-        int nDepth = pindexBest->nHeight - clamour->nHeight + 1;
+        CBricoleurour *bricoleurour = pair.second;
+        int nDepth = pindexBest->nHeight - bricoleurour->nHeight + 1;
 
         if (nDepth < nMinDepth || nDepth > nMaxDepth)
             continue;
 
         UniValue entry(UniValue::VOBJ);
 
-        entry.push_back(Pair("pid", clamour->strHash.substr(0, 8)));
-        entry.push_back(Pair("hash", clamour->strHash));
-        if (clamour->strURL.length())
-            entry.push_back(Pair("url", clamour->strURL));
-        entry.push_back(Pair("txid", clamour->txid.GetHex()));
+        entry.push_back(Pair("pid", bricoleurour->strHash.substr(0, 8)));
+        entry.push_back(Pair("hash", bricoleurour->strHash));
+        if (bricoleurour->strURL.length())
+            entry.push_back(Pair("url", bricoleurour->strURL));
+        entry.push_back(Pair("txid", bricoleurour->txid.GetHex()));
         entry.push_back(Pair("confirmations", nDepth));
 
         ret.push_back(entry);
@@ -553,7 +553,7 @@ UniValue getsupport(const UniValue& params, bool fHelp)
     if (fHelp || params.size() > 3)
         throw runtime_error(
             "getsupport [threshold=0] [window=10000] [block=<bestblock>]\n"
-            "Returns an object detailing the number of blocks supporting CLAMour petitions\n"
+            "Returns an object detailing the number of blocks supporting BRICour petitions\n"
             "<threshold> sets a percentage threshold of support below which petitions are ignored.\n"
             "<window> sets the number of blocks to count and defaults to 10000.\n"
             "<block> sets which block ends the window, and defaults to the last block in the chain.");

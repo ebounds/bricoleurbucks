@@ -111,7 +111,7 @@ void Shutdown()
     TRY_LOCK(cs_Shutdown, lockShutdown);
     if (!lockShutdown) return;
 
-    RenameThread("clam-shutoff");
+    RenameThread("bricoleur-shutoff");
     mempool.AddTransactionsUpdated(1);
     StopRPCThreads();
 #ifdef ENABLE_WALLET
@@ -182,8 +182,8 @@ std::string HelpMessage()
 {
     string strUsage = _("Options:") + "\n";
     strUsage += "  -?                     " + _("This help message") + "\n";
-    strUsage += "  -conf=<file>           " + _("Specify configuration file (default: clam.conf)") + "\n";
-    strUsage += "  -pid=<file>            " + _("Specify pid file (default: clamd.pid)") + "\n";
+    strUsage += "  -conf=<file>           " + _("Specify configuration file (default: bricoleur.conf)") + "\n";
+    strUsage += "  -pid=<file>            " + _("Specify pid file (default: bricoleurd.pid)") + "\n";
     strUsage += "  -datadir=<dir>         " + _("Specify data directory") + "\n";
     strUsage += "  -wallet=<file>         " + _("Specify wallet file within data directory (default: wallet.dat") + "\n";
     strUsage += "  -dbcache=<n>           " + _("Set database cache size in megabytes (default: 25)") + "\n";
@@ -193,7 +193,7 @@ std::string HelpMessage()
     strUsage += "  -socks=<n>             " + _("Select the version of socks proxy to use (4-5, default: 5)") + "\n";
     strUsage += "  -tor=<ip:port>         " + _("Use proxy to reach tor hidden services (default: same as -proxy)") + "\n";
     strUsage += "  -dns                   " + _("Allow DNS lookups for -addnode, -seednode and -connect") + "\n";
-    strUsage += "  -port=<port>           " + _("Listen for connections on <port> (default: 31174 or testnet: 35714)") + "\n";
+    strUsage += "  -port=<port>           " + _("Listen for connections on <port> (default: 60440 or testnet: 60445)") + "\n";
     strUsage += "  -maxconnections=<n>    " + _("Maintain at most <n> connections to peers (default: 125)") + "\n";
     strUsage += "  -addnode=<ip>          " + _("Add a node to connect to and attempt to keep the connection open") + "\n";
     strUsage += "  -connect=<ip>          " + _("Connect only to the specified node(s)") + "\n";
@@ -247,7 +247,7 @@ std::string HelpMessage()
                                                 "solved instantly. This is intended for regression testing tools and app development.") + "\n";
     strUsage += "  -rpcuser=<user>        " + _("Username for JSON-RPC connections") + "\n";
     strUsage += "  -rpcpassword=<pw>      " + _("Password for JSON-RPC connections") + "\n";
-    strUsage += "  -rpcport=<port>        " + _("Listen for JSON-RPC connections on <port> (default: 30174 or testnet: 35715)") + "\n";
+    strUsage += "  -rpcport=<port>        " + _("Listen for JSON-RPC connections on <port> (default: 60440 or testnet: 60445)") + "\n";
     strUsage += "  -rpcallowip=<ip>       " + _("Allow JSON-RPC connections from specified IP address") + "\n";
     if (!fHaveGUI)
     {
@@ -255,8 +255,8 @@ std::string HelpMessage()
         strUsage += "  -rpcwait               " + _("Wait for RPC server to start") + "\n";
     }
     strUsage += "  -rpcthreads=<n>        " + _("Set the number of threads to service RPC calls (default: 4)") + "\n";
-    strUsage += "  -clamspeech=off        " + _("Set clamspeech=off to turn off random clamspeech quotes in outgoing transactions") + "\n";
-    strUsage += "  -clamstake=off         " + _("Set clamstake=off to turn off random clamspeech quotes when staking") + "\n";
+    strUsage += "  -bricoleurspeech=off        " + _("Set bricoleurspeech=off to turn off random bricoleurspeech quotes in outgoing transactions") + "\n";
+    strUsage += "  -bricoleurstake=off         " + _("Set bricoleurstake=off to turn off random bricoleurspeech quotes when staking") + "\n";
     strUsage += "  -blocknotify=<cmd>     " + _("Execute command when the best block changes (%s in cmd is replaced by block hash)") + "\n";
     strUsage += "  -walletnotify=<cmd>    " + _("Execute command when a wallet transaction changes (%s in cmd is replaced by TxID)") + "\n";
     strUsage += "  -stakenotify=<cmd>     " + _("Execute command each time we stake a block") + "\n";
@@ -521,7 +521,7 @@ bool AppInit2(boost::thread_group& threadGroup)
 
     // Sanity check
     if (!InitSanityCheck())
-        return InitError(_("Initialization sanity check failed. Clam is shutting down."));
+        return InitError(_("Initialization sanity check failed. Bricoleur is shutting down."));
 
     std::string strDataDir = GetDataDir().string();
 #ifdef ENABLE_WALLET
@@ -537,12 +537,12 @@ bool AppInit2(boost::thread_group& threadGroup)
     if (file) fclose(file);
     static boost::interprocess::file_lock lock(pathLockFile.string().c_str());
     if (!lock.try_lock())
-        return InitError(strprintf(_("Cannot obtain a lock on data directory %s.  Clam is probably already running."), strDataDir));
+        return InitError(strprintf(_("Cannot obtain a lock on data directory %s.  Bricoleur is probably already running."), strDataDir));
 
     if (GetBoolArg("-shrinkdebugfile", !fDebug))
         ShrinkDebugFile();
     LogPrintf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-    LogPrintf("Clam version %s (%s)\n", FormatFullVersion(), CLIENT_DATE);
+    LogPrintf("Bricoleur version %s (%s)\n", FormatFullVersion(), CLIENT_DATE);
     LogPrintf("Using OpenSSL version %s\n", SSLeay_version(SSLEAY_VERSION));
     if (!fLogTimestamps)
         LogPrintf("Startup time: %s\n", DateTimeStrFormat("%x %H:%M:%S", GetTime()));
@@ -551,7 +551,7 @@ bool AppInit2(boost::thread_group& threadGroup)
     std::ostringstream strErrors;
 
     if (fDaemon)
-        fprintf(stdout, "Clam server starting\n");
+        fprintf(stdout, "Bricoleur server starting\n");
 
     int64_t nStart;
 
@@ -612,8 +612,8 @@ bool AppInit2(boost::thread_group& threadGroup)
     } // (!fDisableWallet)
 #endif // ENABLE_WALLET
 
-    if(!LoadClamSpeech())
-    	return InitError(_("Failed to load CLAMspeech"));
+    if(!LoadBricoleurSpeech())
+    	return InitError(_("Failed to load BRICspeech"));
     // ********************************************************* Step 6: network initialization
 
     RegisterNodeSignals(GetNodeSignals());
@@ -813,10 +813,10 @@ bool AppInit2(boost::thread_group& threadGroup)
                 InitWarning(msg);
             }
             else if (nLoadWalletRet == DB_TOO_NEW)
-                strErrors << _("Error loading wallet.dat: Wallet requires newer version of Clam") << "\n";
+                strErrors << _("Error loading wallet.dat: Wallet requires newer version of Bricoleur") << "\n";
             else if (nLoadWalletRet == DB_NEED_REWRITE)
             {
-                strErrors << _("Wallet needed to be rewritten: restart Clam to complete") << "\n";
+                strErrors << _("Wallet needed to be rewritten: restart Bricoleur to complete") << "\n";
                 LogPrintf("%s", strErrors.str());
                 return InitError(strErrors.str());
             }

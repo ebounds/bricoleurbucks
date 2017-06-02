@@ -1,35 +1,35 @@
-#ifndef CLAMOURPAGE_H
-#define CLAMOURPAGE_H
+#ifndef BRICOURPAGE_H
+#define BRICOURPAGE_H
 
 #include <map>
 
 #include <QWidget>
 
 namespace Ui {
-class ClamourPage;
+class BricoleurourPage;
 }
 class WalletModel;
-class CClamour;
-class ClamourPetitionModel;
-class ClamourSupportModel;
+class CBricoleurour;
+class BricoleurourPetitionModel;
+class BricoleurourSupportModel;
 
 QT_BEGIN_NAMESPACE
 class QMenu;
 QT_END_NAMESPACE
 
-class ClamourPage : public QWidget
+class BricoleurourPage : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit ClamourPage(QWidget *parent = 0);
-    ~ClamourPage();
+    explicit BricoleurourPage(QWidget *parent = 0);
+    ~BricoleurourPage();
 
     void setModel(WalletModel *model);
 
 public slots:
-    void showClamourTxResult(std::string txID, std::string txError);
-    void setClamourSearchResults(CClamour *pResult);
+    void showBricoleurourTxResult(std::string txID, std::string txError);
+    void setBricoleurourSearchResults(CClamour *pResult);
     void showPetitionSupport(std::map<std::string, int> mapSupport);
 
 private slots:
@@ -39,7 +39,7 @@ private slots:
 
     void on_setVotesButton_clicked();
 
-    void on_searchClamourButton_clicked();
+    void on_searchBricoleurourButton_clicked();
 
     void on_getPetitionSupportButton_clicked();
 
@@ -48,14 +48,14 @@ private slots:
     void searchHighlightedPetition();
 
 private:
-    Ui::ClamourPage *ui;
+    Ui::BricoleurourPage *ui;
     WalletModel *model;
-    ClamourPetitionModel *petitionModel;
-    ClamourSupportModel *supportModel;
+    BricoleurourPetitionModel *petitionModel;
+    BricoleurourSupportModel *supportModel;
     QMenu *petitionViewContextMenu;
 
     void loadVotes();
     void saveVotes();
 };
 
-#endif // CLAMOURPAGE_H
+#endif // BRICOURPAGE_H

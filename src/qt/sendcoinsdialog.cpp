@@ -16,7 +16,7 @@
 #include "coincontrol.h"
 #include "coincontroldialog.h"
 
-#include "clamspeech.h"
+#include "bricoleurspeech.h"
 
 #include <QDebug>
 #include <QString>
@@ -126,7 +126,7 @@ void SendCoinsDialog::on_sendButton_clicked()
     if(!model)
         return;
 
-    QString clamspeech = ui->clamQuotes->currentText();
+    QString bricoleurspeech = ui->clamQuotes->currentText();
 
     for(int i = 0; i < ui->entries->count(); ++i)
     {
@@ -180,9 +180,9 @@ void SendCoinsDialog::on_sendButton_clicked()
     WalletModel::SendCoinsReturn sendstatus;
 
     if (!model->getOptionsModel() || !model->getOptionsModel()->getCoinControlFeatures())
-        sendstatus = model->sendCoins(clamspeech, recipients);
+        sendstatus = model->sendCoins(bricoleurspeech, recipients);
     else
-        sendstatus = model->sendCoins(clamspeech, recipients, CoinControlDialog::coinControl);
+        sendstatus = model->sendCoins(bricoleurspeech, recipients, CoinControlDialog::coinControl);
 
     switch(sendstatus.status)
     {
@@ -233,28 +233,28 @@ void SendCoinsDialog::on_sendButton_clicked()
     fNewRecipientAllowed = true;
 }
 
-void SendCoinsDialog::clamSpeechIndexChanged(const int &index)
+void SendCoinsDialog::bricoleurSpeechIndexChanged(const int &index)
 {
-    if ( index >= clamSpeechQuoteCount )
+    if ( index >= bricoleurSpeechQuoteCount )
     {
-        qDebug() << "New CLAMSpeech quote added at" << index;
+        qDebug() << "New BRICSpeech quote added at" << index;
 
         // Add quote
-        quoteList.push_back( ui->clamQuotes->itemText(index).toStdString() );
+        quoteList.push_back( ui->bricoleurQuotes->itemText(index).toStdString() );
     }
 
-    clamSpeechQuoteCount = ui->clamQuotes->count();
-    nClamSpeechIndex = index;
+    bricoleurSpeechQuoteCount = ui->clamQuotes->count();
+    nBricoleurSpeechIndex = index;
 
-    qDebug() << "saving nClamSpeechIndex =" << index;
+    qDebug() << "saving nBricoleurSpeechIndex =" << index;
     // Save to QSettings
     QSettings settings;
-    settings.setValue( "nClamSpeechIndex", nClamSpeechIndex );
+    settings.setValue( "nBricoleurSpeechIndex", nClamSpeechIndex );
 }
 
 void SendCoinsDialog::clear()
 {
-    ui->clamQuotes->clear();
+    ui->bricoleurQuotes->clear();
     // Remove 
     //entries until only one left
     while(ui->entries->count())
@@ -323,8 +323,8 @@ void SendCoinsDialog::removeEntry(SendCoinsEntry* entry)
 
 QWidget *SendCoinsDialog::setupTabChain(QWidget *prev)
 {
-    QWidget::setTabOrder(prev, ui->clamQuotes);
-    prev = ui->clamQuotes;
+    QWidget::setTabOrder(prev, ui->bricoleurQuotes);
+    prev = ui->bricoleurQuotes;
 
     for(int i = 0; i < ui->entries->count(); ++i)
     {
@@ -390,56 +390,56 @@ void SendCoinsDialog::setBalance(qint64 balance, qint64 stake, qint64 unconfirme
     }
 }
 
-void SendCoinsDialog::loadClamSpeech()
+void SendCoinsDialog::loadBricoleurSpeech()
 {
-    if ( !fUseClamSpeech )
+    if ( !fUseBricoleurSpeech )
         return;
 
     // disconnect widget change signal to stop clashing
-    disconnect( ui->clamQuotes, SIGNAL(currentIndexChanged(int)), this, SLOT(clamSpeechIndexChanged(int)) );
+    disconnect( ui->bricoleurQuotes, SIGNAL(currentIndexChanged(int)), this, SLOT(clamSpeechIndexChanged(int)) );
 
-    // Load quotes from clamspeech.h
-    ui->clamQuotes->clear();
-    for ( ulong i = 0; i < clamSpeech.size(); i++ )
-        ui->clamQuotes->addItem( QString::fromStdString( clamSpeech.at(i) ) );
+    // Load quotes from bricoleurspeech.h
+    ui->bricoleurQuotes->clear();
+    for ( ulong i = 0; i < bricoleurSpeech.size(); i++ )
+        ui->bricoleurQuotes->addItem( QString::fromStdString( clamSpeech.at(i) ) );
 
     // Hold the index count to detect appending new quotes
-    clamSpeechQuoteCount = ui->clamQuotes->count();
+    bricoleurSpeechQuoteCount = ui->clamQuotes->count();
 
-    if ( !clamSpeechQuoteCount )
+    if ( !bricoleurSpeechQuoteCount )
         return;
 
     // Select a random index based on current time, if random option set
-    if ( fUseClamSpeechRandom && clamSpeechQuoteCount )
+    if ( fUseBricoleurSpeechRandom && bricoleurSpeechQuoteCount )
     {
         qDebug() << "Random quote selected";
 
         qsrand( (QDateTime().toTime_t() * 1000) );
-        ui->clamQuotes->setCurrentIndex( qrand() % ui->clamQuotes->count() );
+        ui->bricoleurQuotes->setCurrentIndex( qrand() % ui->clamQuotes->count() );
     }
     else // Fixed chosen quote
     {
         // Support out of bounds removal with already set index
-        if ( nClamSpeechIndex >= clamSpeechQuoteCount )
-            nClamSpeechIndex = clamSpeechQuoteCount -1;
+        if ( nBricoleurSpeechIndex >= bricoleurSpeechQuoteCount )
+            nBricoleurSpeechIndex = bricoleurSpeechQuoteCount -1;
 
-        ui->clamQuotes->setCurrentIndex( nClamSpeechIndex );
+        ui->bricoleurQuotes->setCurrentIndex( nBricoleurSpeechIndex );
     }
 
     // Print debug info
-    qDebug() << clamSpeechQuoteCount << "CLAMSpeech quotes parsed.";
-    qDebug() << "fClamSpeechRandom =" << fUseClamSpeechRandom;
-    qDebug() << "nClamSpeechIndex =" << nClamSpeechIndex;
-    qDebug() << "CLAMSpeech selected index" << ui->clamQuotes->currentIndex();
+    qDebug() << bricoleurSpeechQuoteCount << "BRICSpeech quotes parsed.";
+    qDebug() << "fBricoleurSpeechRandom =" << fUseClamSpeechRandom;
+    qDebug() << "nBricoleurSpeechIndex =" << nClamSpeechIndex;
+    qDebug() << "BRICSpeech selected index" << ui->bricoleurQuotes->currentIndex();
 
-    // setup clamspeech widget change signal
-    connect( ui->clamQuotes, SIGNAL(currentIndexChanged(int)), this, SLOT(clamSpeechIndexChanged(int)) );
+    // setup bricoleurspeech widget change signal
+    connect( ui->bricoleurQuotes, SIGNAL(currentIndexChanged(int)), this, SLOT(clamSpeechIndexChanged(int)) );
 }
 
 void SendCoinsDialog::uiReady()
 {
     qDebug() << "SendCoinsDialog::uiReady()";
-    this->loadClamSpeech();
+    this->loadBricoleurSpeech();
 }
 
 void SendCoinsDialog::updateDisplayUnit()
@@ -542,7 +542,7 @@ void SendCoinsDialog::coinControlChangeEdited(const QString & text)
         else if (!CBitcoinAddress(text.toStdString()).IsValid())
         {
             ui->labelCoinControlChangeLabel->setStyleSheet("QLabel{color:red;}");
-            ui->labelCoinControlChangeLabel->setText(tr("WARNING: Invalid Clam address"));
+            ui->labelCoinControlChangeLabel->setText(tr("WARNING: Invalid Bricoleur address"));
         }
         else
         {
